@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hriday's Birthday Scratch Card</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        .card { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; }
+        .scratch-box { background: gray; width: 200px; height: 50px; margin: 20px auto; color: white; font-size: 20px; text-align: center; line-height: 50px; cursor: pointer; }
+        .hidden { visibility: hidden; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>🎉 Hriday’s Birthday Scratch Card 🎉</h2>
+        <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness. Scratch below to see the donation amount we will donate on your behalf!</p>
+        <div class="scratch-box" onclick="revealAmount()">Scratch Here!</div>
+        <p id="amount" class="hidden">🎁 Your donation amount: ₹100 🎁</p>
+        <p>Select where you'd like to donate:</p>
+        <select id="cause">
+            <option value="education">📚 Kids' Education</option>
+            <option value="orphanage">💕 Orphanage</option>
+            <option value="animal">🐾 Animal Shelter</option>
+            <option value="oldage">😊 Old Age Home</option>
+        </select>
+        <br><br>
+        <button onclick="sendVideo()">Send Video Message 🎥</button>
+    </div>
+
+    <script>
+        function revealAmount() {
+            document.querySelector('.scratch-box').style.background = 'white';
+            document.querySelector('.scratch-box').innerText = '';
+            document.getElementById('amount').classList.remove('hidden');
+        }
+        
+        function sendVideo() {
+            let cause = document.getElementById('cause').value;
+            alert(`Please record a video wishing Hriday a Happy Birthday and mention your donation choice: ${cause}`);
+        }
+    </script>
+</body>
+</html>
