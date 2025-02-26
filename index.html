@@ -32,11 +32,14 @@
             margin-bottom: 20px;
             line-height: 1.5;
         }
-        button {
-            padding: 15px;
+        select, button {
+            padding: 10px;
             font-size: 1.4em;
             border-radius: 5px;
             border: none;
+            margin-top: 15px;
+        }
+        button {
             background: #FF4500;
             color: white;
             font-weight: bold;
@@ -52,25 +55,39 @@
     <!-- Background Music -->
     <audio id="birthdayMusic" loop>
         <source src="happy-birthday-background-music-298561.mp3" type="audio/mp3">
-        Your browser does not support the audio element.
+        Your browser does not support the audio tag.
     </audio>
 
     <script>
-        // Play music as soon as the user interacts with the page
-        document.addEventListener("click", function () {
+        function playMusic() {
             let audio = document.getElementById("birthdayMusic");
             if (audio.paused) {
                 audio.play().catch(error => console.log("Autoplay blocked:", error));
             }
-        });
+        }
+
+        function proceedToScratchCard() {
+            let selectedCause = document.getElementById("causeSelection").value;
+            localStorage.setItem("selectedCause", selectedCause); // Store cause for next page
+            window.location.href = "scratch_card.html";
+        }
     </script>
 
     <div class="container">
         <h1>🎁 The Joy of Giving 🎁</h1>
-        <p>Birthdays are not just about receiving but also about spreading love and kindness. 
+        <p>Birthdays are not just about receiving but also about spreading love and kindness.  
         Celebrate Hriday’s birthday by sharing joy with those in need.</p>
-        <p>Click below to receive a special surprise and spread happiness! 🎉</p>
-        <button onclick="window.location.href='scratch_card.html'">🎂 Celebrate with Hriday 🎂</button>
+
+        <p>Select a cause to donate:</p>
+        <select id="causeSelection" onchange="playMusic()">
+            <option value="" disabled selected>Choose a cause</option>
+            <option value="education">📚 Kids' Education</option>
+            <option value="elderly">🏡 Elderly Care</option>
+            <option value="animals">🐶 Animal Shelter</option>
+            <option value="general">💖 General Donation</option>
+        </select>
+
+        <button onclick="proceedToScratchCard()">🎂 Celebrate with Hriday 🎂</button>
     </div>
 
 </body>
