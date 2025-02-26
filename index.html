@@ -16,10 +16,10 @@
             background: url('https://raw.githubusercontent.com/nirav1984/hriday_scratch_card/main/FB_IMG_1681316596026~2.jpg') no-repeat center center fixed;
             background-size: cover;
             position: relative;
-            color: white;
+            color: #8B4513; /* Deep Brown for better contrast */
         }
 
-        /* Soft Overlay to Improve Readability */
+        /* Soft Golden Overlay */
         body::before {
             content: "";
             position: absolute;
@@ -27,23 +27,24 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.2); /* Lighter overlay */
+            background: rgba(255, 223, 100, 0.3); /* Light Gold */
             z-index: -1;
         }
 
         .container {
-            background: rgba(0, 0, 0, 0.5); /* Light Black Overlay */
+            background: rgba(255, 223, 100, 0.7); /* Golden yellow */
             padding: 30px;
             border-radius: 10px;
             display: inline-block;
             margin-top: 20px;
             max-width: 90%;
-            box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.2);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         h1 {
             font-size: 2.8em;
             margin-bottom: 10px;
+            color: #8B4513; /* Deep Brown */
         }
 
         p {
@@ -51,6 +52,7 @@
             font-family: 'Poppins', sans-serif;
             margin-bottom: 20px;
             line-height: 1.5;
+            color: #6A4A3B; /* Warm Chocolate Brown */
         }
 
         select, button {
@@ -62,13 +64,14 @@
         }
 
         button {
-            background: #FFD700;
+            background: #FF8C00; /* Warm Orange */
             font-weight: bold;
+            color: white;
             cursor: pointer;
         }
 
         button:hover {
-            background: #FFA500;
+            background: #E67E22;
         }
 
         /* Audio Hidden But Auto-Playing */
