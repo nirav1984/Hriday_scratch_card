@@ -32,24 +32,33 @@
             margin-bottom: 20px;
             line-height: 1.5;
         }
-        .btn {
-            padding: 15px 20px;
+        button {
+            padding: 15px;
             font-size: 1.4em;
-            font-weight: bold;
-            background: #B22222;
-            color: white;
-            border: none;
             border-radius: 5px;
+            border: none;
+            background: #FF4500;
+            color: white;
+            font-weight: bold;
             cursor: pointer;
-            margin-top: 20px;
-            text-decoration: none;
-            display: inline-block;
         }
-        .btn:hover {
-            background: #8B0000;
+        button:hover {
+            background: #FF6347;
         }
     </style>
 </head>
 <body>
+    <audio id="bg-music" loop autoplay>
+        <source src="happy-birthday-background-music-298561.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
-    <!-- Background Music with JavaScript Auto-Play Fix -->
+    <div class="container">
+        <h1>🎁 The Joy of Giving 🎁</h1>
+        <p>Birthdays are not just about receiving but also about spreading love and kindness. 
+        Celebrate Hriday’s birthday by sharing joy with those in need.</p>
+        <p>Click below to receive a special surprise and spread happiness! 🎉</p>
+        <button onclick="window.location.href='scratch_card.html'">🎂 Celebrate with Hriday 🎂</button>
+    </div>
+</body>
+</html>
