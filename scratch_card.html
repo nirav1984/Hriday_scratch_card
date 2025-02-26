@@ -3,81 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎉 Hriday's Birthday Scratch Card 🎉</title>
+    <title>🎉 Hriday’s Birthday Scratch Card 🎉</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;600&display=swap');
+
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            font-size: 18px;
+            font-family: 'Poppins', sans-serif;
             text-align: center;
-            background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center fixed;
-            background-size: cover;
+            padding: 20px;
+            background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center/cover;
             color: white;
-            margin: 0;
-            padding: 0;
         }
+
         .overlay {
             background: rgba(0, 0, 0, 0.6);
-            padding: 20px;
+            padding: 30px;
             border-radius: 10px;
-            margin: 30px;
+            display: inline-block;
+            margin-top: 20px;
+            max-width: 90%;
         }
-        .hidden {
-            display: none;
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
         }
+
+        p {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
         .scratch-box {
             background: gray;
-            padding: 15px;
+            width: 200px;
+            height: 100px;
             display: inline-block;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 10px;
+            margin: 15px 0;
+            color: black;
+            font-size: 1.8em;
+            font-weight: bold;
+            line-height: 100px;
+            text-align: center;
+            border-radius: 10px;
         }
-        .message-button {
-            display: block;
-            background-color: #ff4500;
-            color: white;
-            padding: 12px;
-            border: none;
+
+        .hidden {
+            visibility: hidden;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 1.2em;
+            border-radius: 5px;
             margin: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
+            border: none;
+            background: #FFA500;
+            color: white;
+            font-weight: bold;
         }
-        .message-button:hover {
-            background-color: #e03e00;
+
+        button:hover {
+            background: #FF4500;
         }
     </style>
 </head>
 <body>
-    <audio id="bgMusic" autoplay loop>
-        <source src="happy-birthday-background-music-298561.mp3" type="audio/mp3">
-    </audio>
-
     <div class="overlay">
-        <h1>🎉 Hriday's Birthday Scratch Card 🎉</h1>
-        <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness. Scratch below to see the donation amount and cause we will donate on your behalf!</p>
-        
-        <div class="scratch-box" onclick="revealDonation()">🎁 Scratch Here 🎁</div>
+        <h1>🎉 Hriday’s Birthday Scratch Card 🎉</h1>
+        <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness.  
+        Scratch below to see the donation amount and cause we will donate on your behalf!</p>
 
-        <div id="amount" class="hidden">
-            <p>🎁 We will donate ₹<span id="donationAmount"></span> for <span id="donationCause"></span> 🎁</p>
-        </div>
+        <div class="scratch-box" onclick="revealAmount()">Scratch Here!</div>
+        <p id="amount" class="hidden">🎁 We will donate ₹<span id="donationAmount"></span> for <span id="donationCause"></span> 🎁</p>
 
-        <p>Send a heartfelt message to:</p>
-        <button class="message-button" onclick="sendMessage('919773084403')">📩 Message Nirav</button>
-        <button class="message-button" onclick="sendMessage('919699929744')">📩 Message Ekta</button>
+        <button onclick="sendMessage('9773084403')">📩 Send a heartfelt message to Nirav</button>
+        <button onclick="sendMessage('919699929744')">📩 Send a heartfelt message to Ekta</button>
     </div>
 
-    <script>
-        const amounts = [100, 150, 200, 250];
-        const causes = {
-            "education": "Kids' Education",
-            "elderly": "Elderly Care",
-            "animals": "Animal Shelter",
-            "general": "General Donation"
-        };
+    <audio id="birthdayAudio" src="happy-birthday-background-music-298561.mp3" loop autoplay></audio>
 
-        function revealDonation() {
+    <script>
+        function revealAmount() {
+            const amounts = [100, 150, 200, 250];
+            const causes = {
+                "education": "Kids' Education",
+                "elderly": "Elderly Care",
+                "animals": "Animal Shelter",
+                "general": "General Donation"
+            };
+
             const selectedCauseKey = sessionStorage.getItem("selectedCause");
 
             if (!selectedCauseKey || !causes[selectedCauseKey]) {
@@ -96,10 +112,7 @@
         }
 
         function sendMessage(phone) {
-            const amount = document.getElementById("donationAmount").innerText;
-            const cause = document.getElementById("donationCause").innerText;
-            const message = `Hi! Thank you for celebrating Hriday's birthday. We will be donating ₹${amount} for ${cause} on your behalf. Feel free to send your blessings & wishes for Hriday!`;
-            window.location.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            window.location.href = `https://wa.me/${phone}?text=Thank%20you%20for%20this%20beautiful%20gesture!`;
         }
     </script>
 </body>
