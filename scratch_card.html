@@ -120,7 +120,14 @@
             // Get selected cause from URL parameter
             const urlParams = new URLSearchParams(window.location.search);
             const causeKey = urlParams.get('cause'); 
-            const selectedCause = causes[causeKey] || "General Donation"; // Default to general if missing
+
+            if (!causeKey || !causes[causeKey]) {
+                alert("No cause selected! Redirecting back to the selection page.");
+                window.location.href = "index.html"; // Redirect back to selection
+                return;
+            }
+
+            const selectedCause = causes[causeKey]; 
 
             // Randomize the donation amount
             const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
