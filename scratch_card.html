@@ -59,6 +59,7 @@
         button {
             background: #FFD700;
             font-weight: bold;
+            cursor: pointer;
         }
         button:hover {
             background: #FFA500;
@@ -66,6 +67,12 @@
     </style>
 </head>
 <body>
+    <!-- Background Music -->
+    <audio autoplay loop>
+        <source src="happy-birthday-background-music-298561.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
+
     <div class="container">
         <h1>🎉 Hriday’s Birthday Scratch Card 🎉</h1>
         <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness.  
@@ -82,23 +89,24 @@
             <option value="general">💖 General Donation</option>
         </select>
         
-        <button onclick="sendWhatsAppMessage()">💌 Send a heartfelt message on WhatsApp to Nirav/Ekta</button>
+        <button onclick="sendMessage()">💌 Send a heartfelt message to Nirav/Ekta</button>
     </div>
 
     <script>
         function revealAmount() {
-            const amounts = [100, 150, 200, 250]; // Fixed donation values
+            const amounts = [100, 150, 200, 250];
             const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
-            document.querySelector(".scratch-box").style.display = "none";
             document.getElementById("donationAmount").textContent = randomAmount;
+            document.querySelector(".scratch-box").style.display = "none";
             document.getElementById("amount").classList.remove("hidden");
         }
-        
-        function sendWhatsAppMessage() {
-            const phoneNumber = "91XXXXXXXXXX"; // Replace with Nirav/Ekta's phone number
-            const message = encodeURIComponent("Happy Birthday Hriday! 🎉🎂 I love this wonderful initiative of giving. I have selected my cause and I'm excited to be a part of this celebration!");
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
-            window.open(whatsappUrl, '_blank');
+
+        function sendMessage() {
+            const selectedCause = document.getElementById("cause").value;
+            const donationAmount = document.getElementById("donationAmount").textContent;
+            const message = `Happy Birthday Hriday! 🎉 I have chosen to donate ₹${donationAmount} to ${selectedCause} as part of this wonderful celebration!`;
+            const whatsappURL = `https://api.whatsapp.com/send?phone=+919999999999&text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, "_blank");
         }
     </script>
 </body>
