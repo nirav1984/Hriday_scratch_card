@@ -6,7 +6,7 @@
     <title>🎉 Hriday's Birthday Scratch Card 🎉</title>
     <style>
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-family: 'Poppins', sans-serif; /* Restored original font */
             text-align: center;
             background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center/cover;
             color: white;
@@ -97,7 +97,7 @@
             window.location.href = "index.html";
         }
 
-        let selectedCause = causes[selectedCauseKey];
+        let selectedCause = causes[selectedCauseKey] || "Kids' Education"; // Ensures a valid cause is always picked
         let donationAmounts = [100, 150, 200, 250];
         let selectedAmount = donationAmounts[Math.floor(Math.random() * donationAmounts.length)];
 
