@@ -68,24 +68,20 @@
             visibility: hidden;
         }
 
-        select, button {
-            padding: 10px;
+        button {
+            padding: 12px 20px;
             font-size: 1.2em;
             border-radius: 5px;
             margin: 10px;
             border: none;
             cursor: pointer;
-        }
-
-        select {
-            background: #FFB400;
-            color: white;
-        }
-
-        button {
             background: #D2691E; /* Chocolate color */
             color: white;
             font-weight: bold;
+            display: block;
+            width: 80%;
+            max-width: 300px;
+            margin: 10px auto;
         }
 
         button:hover {
@@ -108,15 +104,11 @@
         <div class="scratch-box" onclick="revealAmount()">Scratch Here!</div>
         <p id="amount" class="hidden">🎁 Your donation amount: ₹<span id="donationAmount"></span> 🎁</p>
 
-        <p>Select where you'd like to donate:</p>
-        <select id="cause">
-            <option value="education">📚 Kids' Education</option>
-            <option value="elderly">🏡 Elderly Care</option>
-            <option value="animals">🐶 Animal Shelter</option>
-            <option value="general">💖 General Donation</option>
-        </select>
+        <p>Send a heartfelt message:</p>
         
-        <button onclick="sendMessage()">💌 Send a Heartfelt Message to Nirav or Ekta 💌</button>
+        <!-- Separate buttons for Nirav and Ekta -->
+        <button onclick="sendMessage('9699929744')">💌 Send Message to Ekta 💌</button>
+        <button onclick="sendMessage('9773084403')">💌 Send Message to Nirav 💌</button>
     </div>
 
     <audio id="birthdaySong" src="happy-birthday-background-music-298561.mp3" autoplay></audio>
@@ -130,13 +122,9 @@
             document.getElementById("amount").classList.remove("hidden");
         }
 
-        function sendMessage() {
-            const numberEkta = "9699929744";  
-            const numberNirav = "9773084403";  
-
+        function sendMessage(number) {
             const message = encodeURIComponent("I just participated in Hriday’s birthday donation! 🎉 Thank you for this beautiful initiative! 💖");
-
-            const whatsappLink = `https://wa.me/${prompt("Send message to: 1 for Ekta, 2 for Nirav") === "1" ? numberEkta : numberNirav}?text=${message}`;
+            const whatsappLink = `https://wa.me/${number}?text=${message}`;
             window.open(whatsappLink, "_blank");
         }
     </script>
