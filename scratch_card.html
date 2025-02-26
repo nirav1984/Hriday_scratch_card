@@ -3,48 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎂 Hriday’s Birthday Scratch Card 🎂</title>
+    <title>🎉 Hriday's Birthday Scratch Card 🎉</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;600&display=swap');
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Dancing Script', cursive;
             text-align: center;
             padding: 20px;
-            background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center/cover;
-            position: relative;
-        }
-
-        /* Overlay for readability */
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        .content {
-            position: relative;
-            z-index: 1;
-        }
-
-        h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.8em;
-            color: #FFD700; /* Gold */
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
-        }
-
-        p {
-            font-size: 1.5em;
-            font-weight: 500;
+            background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
-
-        /* Scratch Box */
+        .overlay {
+            background: rgba(0, 0, 0, 0.5); 
+            padding: 30px;
+            border-radius: 10px;
+            display: inline-block;
+            max-width: 85%;
+            margin-top: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.3em;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
         .scratch-box {
             background: gray;
             width: 220px;
@@ -59,53 +47,51 @@
             border-radius: 10px;
             cursor: pointer;
         }
-
         .hidden {
             display: none;
         }
-
-        /* Button Styles */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
         button {
             padding: 12px 20px;
             font-size: 1.2em;
             border-radius: 5px;
-            margin: 10px;
             border: none;
             cursor: pointer;
-            background: #D2691E; /* Chocolate color */
-            color: white;
             font-weight: bold;
-            display: block;
-            width: 80%;
-            max-width: 300px;
-            margin: 10px auto;
+            background: #FFD700;
+            color: black;
         }
-
         button:hover {
-            background: #A0522D;
-        }
-
-        audio {
-            display: none;
+            background: #FFA500;
         }
     </style>
 </head>
 <body>
-    <div class="overlay"></div>
-    <div class="content">
-        <h1>🎉 Hriday’s Birthday Scratch Card 🎉</h1>
+
+    <!-- Background Music -->
+    <audio id="birthdayMusic" autoplay loop>
+        <source src="happy-birthday-background-music-298561.mp3" type="audio/mp3">
+    </audio>
+
+    <div class="overlay">
+        <h1>🎉 Hriday's Birthday Scratch Card 🎉</h1>
         <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness.  
         Scratch below to see the donation amount and cause we will donate on your behalf!</p>
 
         <div class="scratch-box" onclick="revealAmount()">Scratch Here!</div>
-        <p id="amount" class="hidden">We will donate ₹<span id="donationAmount"></span> for <span id="donationCause"></span> on your behalf 🎁</p>
+        
+        <p id="amount" class="hidden">🎁 We will donate <strong>₹<span id="donationAmount"></span></strong> for <strong><span id="donationCause"></span></strong> on your behalf! 🎁</p>
 
-        <p>Send a heartfelt message:</p>
-        <button onclick="sendMessage('919699929744')">💌 Send Message to Ekta 💌</button>
-        <button onclick="sendMessage('919773084403')">💌 Send Message to Nirav 💌</button>
+        <div class="buttons">
+            <button onclick="sendMessage('9773084403')">💌 Send to Nirav</button>
+            <button onclick="sendMessage('919699929744')">💌 Send to Ekta</button>
+        </div>
     </div>
-
-    <audio id="birthdaySong" src="happy-birthday-background-music-298561.mp3" autoplay></audio>
 
     <script>
         function revealAmount() {
@@ -117,32 +103,32 @@
                 "general": "General Donation"
             };
 
-            // Get selected cause from URL parameter
-            const urlParams = new URLSearchParams(window.location.search);
-            const causeKey = urlParams.get('cause'); 
+            const selectedCauseKey = sessionStorage.getItem("selectedCause");
 
-            if (!causeKey || !causes[causeKey]) {
+            if (!selectedCauseKey || !causes[selectedCauseKey]) {
                 alert("No cause selected! Redirecting back to the selection page.");
-                window.location.href = "index.html"; // Redirect back to selection
+                window.location.href = "index.html";
                 return;
             }
 
-            const selectedCause = causes[causeKey]; 
-
-            // Randomize the donation amount
+            const selectedCause = causes[selectedCauseKey];
             const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
 
             document.getElementById("donationAmount").innerText = randomAmount;
             document.getElementById("donationCause").innerText = selectedCause;
             document.getElementById("amount").classList.remove("hidden");
-            document.querySelector(".scratch-box").classList.add("hidden"); // Hide scratch box after clicking
+            document.querySelector(".scratch-box").classList.add("hidden");
         }
 
-        function sendMessage(number) {
-            const message = encodeURIComponent("I just participated in Hriday’s birthday donation! 🎉 Thank you for this beautiful initiative! 💖");
-            const whatsappLink = `https://wa.me/${number}?text=${message}`;
+        function sendMessage(phoneNumber) {
+            const donationAmount = document.getElementById("donationAmount").innerText;
+            const donationCause = document.getElementById("donationCause").innerText;
+
+            const message = `I celebrated Hriday's birthday by donating ₹${donationAmount} towards ${donationCause}! 🎉`;
+            const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappLink, "_blank");
         }
     </script>
+
 </body>
 </html>
