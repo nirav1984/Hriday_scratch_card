@@ -3,69 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎂 The Joy of Giving 🎂</title>
+    <title>🎉 Hriday’s Birthday Scratch Card 🎉</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;600&display=swap');
+
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            font-size: 18px;
+            font-family: 'Poppins', sans-serif;
             text-align: center;
-            background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center fixed;
-            background-size: cover;
+            padding: 20px;
+            background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center/cover;
             color: white;
-            margin: 0;
-            padding: 0;
         }
+
         .overlay {
             background: rgba(0, 0, 0, 0.6);
-            padding: 20px;
+            padding: 30px;
             border-radius: 10px;
-            margin: 30px;
+            display: inline-block;
+            margin-top: 20px;
+            max-width: 90%;
         }
-        select, button {
-            padding: 12px;
-            font-size: 18px;
-            border: none;
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .scratch-box {
+            background: gray;
+            width: 200px;
+            height: 100px;
+            display: inline-block;
+            margin: 15px 0;
+            color: black;
+            font-size: 1.8em;
+            font-weight: bold;
+            line-height: 100px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .hidden {
+            visibility: hidden;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 1.2em;
             border-radius: 5px;
             margin: 10px;
-        }
-        button {
-            background-color: #ff4500;
+            border: none;
+            background: #FFA500;
             color: white;
-            cursor: pointer;
+            font-weight: bold;
         }
+
         button:hover {
-            background-color: #e03e00;
+            background: #FF4500;
         }
     </style>
 </head>
 <body>
-    <audio id="bgMusic" autoplay loop>
-        <source src="happy-birthday-background-music-298561.mp3" type="audio/mp3">
-    </audio>
-
     <div class="overlay">
-        <h1>🎂 Let's Celebrate with Purpose! 🎂</h1>
-        <p>🎁 As part of Hriday’s Birthday, we’re spreading joy by **donating on your behalf**! 🎁</p>
-        <p>📢 **Select a cause** that speaks to your heart and be part of something **bigger than just a celebration!** 🎊</p>
-        <p>💡 Small acts create **big change**—let’s make a difference together! 🌍</p>
-        
-        <p>Select where you'd like the donation to go:</p>
-        <select id="cause">
-            <option value="education">📚 Kids' Education</option>
-            <option value="elderly">👴 Elderly Care</option>
-            <option value="animals">🐶 Animal Shelter</option>
-            <option value="general">❤️ General Donation</option>
-        </select>
-        <br>
-        <button onclick="proceedToScratch()">🎂 Celebrate with Hriday 🎂</button>
+        <h1>🎉 Hriday’s Birthday Scratch Card 🎉</h1>
+        <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness.  
+        Scratch below to see the donation amount and cause we will donate on your behalf!</p>
+
+        <div class="scratch-box" onclick="revealAmount()">Scratch Here!</div>
+        <p id="amount" class="hidden">🎁 We will donate ₹<span id="donationAmount"></span> for <span id="donationCause"></span> 🎁</p>
+
+        <button onclick="sendMessage('9773084403')">📩 Send a heartfelt message to Nirav</button>
+        <button onclick="sendMessage('919699929744')">📩 Send a heartfelt message to Ekta</button>
     </div>
 
+    <audio id="birthdayAudio" src="happy-birthday-background-music-298561.mp3" loop autoplay></audio>
+
     <script>
-        function proceedToScratch() {
-            const selectedCause = document.getElementById("cause").value;
-            sessionStorage.setItem("selectedCause", selectedCause);
-            document.getElementById("bgMusic").play();
-            window.location.href = "scratch_card.html";
+        function revealAmount() {
+            const amounts = [100, 150, 200, 250];
+            const causes = {
+                "education": "Kids' Education",
+                "elderly": "Elderly Care",
+                "animals": "Animal Shelter",
+                "general": "General Donation"
+            };
+
+            const selectedCauseKey = sessionStorage.getItem("selectedCause");
+
+            if (!selectedCauseKey || !causes[selectedCauseKey]) {
+                alert("No cause selected! Redirecting back to the selection page.");
+                window.location.href = "index.html";
+                return;
+            }
+
+            const selectedCause = causes[selectedCauseKey];
+            const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
+
+            document.getElementById("donationAmount").innerText = randomAmount;
+            document.getElementById("donationCause").innerText = selectedCause;
+            document.getElementById("amount").classList.remove("hidden");
+            document.querySelector(".scratch-box").style.display = "none";
+        }
+
+        function sendMessage(phone) {
+            window.location.href = `https://wa.me/${phone}?text=Thank%20you%20for%20this%20beautiful%20gesture!`;
         }
     </script>
 </body>
