@@ -97,7 +97,7 @@
             const selectedCause = localStorage.getItem("selectedCause") || "a cause";
             const donationAmount = document.getElementById("donationAmount").textContent;
             const message = `Happy Birthday Hriday! 🎉 I have chosen to donate ₹${donationAmount} to ${selectedCause}.`;
-            window.open(`https://api.whatsapp.com/send?phone=+919699929744&text=${encodeURIComponent(message)}`, "_blank");
+            window.open(`https://api.whatsapp.com/send?phone=919699929744&text=${encodeURIComponent(message)}`, "_blank");
         }
 
         // Load the selected cause from index.html
