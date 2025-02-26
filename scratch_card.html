@@ -11,61 +11,57 @@
             font-family: 'Poppins', sans-serif;
             text-align: center;
             padding: 20px;
-            background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center/cover;
+            background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: white;
         }
-
         .overlay {
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.5);
             padding: 30px;
             border-radius: 10px;
             display: inline-block;
             margin-top: 20px;
             max-width: 90%;
         }
-
         h1 {
             font-size: 2.8em;
             margin-bottom: 10px;
+            font-family: 'Dancing Script', cursive;
         }
-
         p {
-            font-size: 1.4em;
-            margin-bottom: 20px;
+            font-size: 1.3em;
+            margin-bottom: 15px;
             line-height: 1.5;
         }
-
         .scratch-box {
             background: gray;
-            width: 200px;
-            height: 100px;
+            width: 220px;
+            height: 110px;
             display: inline-block;
             margin: 15px 0;
             color: black;
             font-size: 1.8em;
             font-weight: bold;
-            line-height: 100px;
+            line-height: 110px;
             text-align: center;
             border-radius: 10px;
+            cursor: pointer;
         }
-
         .hidden {
             visibility: hidden;
         }
-
         button {
-            padding: 10px;
+            padding: 12px;
             font-size: 1.2em;
             border-radius: 5px;
             margin: 10px;
             border: none;
-            background: #FFA500;
-            color: white;
+            background: #FFD700;
             font-weight: bold;
+            cursor: pointer;
         }
-
         button:hover {
-            background: #FF4500;
+            background: #FFA500;
         }
     </style>
 </head>
@@ -78,41 +74,32 @@
         <div class="scratch-box" onclick="revealAmount()">Scratch Here!</div>
         <p id="amount" class="hidden">🎁 We will donate ₹<span id="donationAmount"></span> for <span id="donationCause"></span> 🎁</p>
 
-        <button onclick="sendMessage('9773084403')">📩 Send a heartfelt message to Nirav</button>
-        <button onclick="sendMessage('919699929744')">📩 Send a heartfelt message to Ekta</button>
+        <p>Send a heartfelt message to:</p>
+        <button onclick="sendWhatsAppMessage('9773084403')">📩 Message Nirav</button>
+        <button onclick="sendWhatsAppMessage('919699929744')">📩 Message Ekta</button>
     </div>
 
-    <audio id="birthdayAudio" src="happy-birthday-background-music-298561.mp3" loop autoplay></audio>
-
     <script>
-        function revealAmount() {
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const selectedCause = urlParams.get("cause") || "a meaningful cause";
             const amounts = [100, 150, 200, 250];
-            const causes = {
-                "education": "Kids' Education",
-                "elderly": "Elderly Care",
-                "animals": "Animal Shelter",
-                "general": "General Donation"
-            };
-
-            const selectedCauseKey = sessionStorage.getItem("selectedCause");
-
-            if (!selectedCauseKey || !causes[selectedCauseKey]) {
-                alert("No cause selected! Redirecting back to the selection page.");
-                window.location.href = "index.html";
-                return;
-            }
-
-            const selectedCause = causes[selectedCauseKey];
             const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
 
-            document.getElementById("donationAmount").innerText = randomAmount;
-            document.getElementById("donationCause").innerText = selectedCause;
-            document.getElementById("amount").classList.remove("hidden");
+            document.getElementById("donationAmount").textContent = randomAmount;
+            document.getElementById("donationCause").textContent = selectedCause;
+        });
+
+        function revealAmount() {
             document.querySelector(".scratch-box").style.display = "none";
+            document.getElementById("amount").classList.remove("hidden");
         }
 
-        function sendMessage(phone) {
-            window.location.href = `https://wa.me/${phone}?text=Thank%20you%20for%20this%20beautiful%20gesture!`;
+        function sendWhatsAppMessage(number) {
+            const amount = document.getElementById("donationAmount").textContent;
+            const cause = document.getElementById("donationCause").textContent;
+            const message = `Hi, a donation of ₹${amount} will be made on my behalf for ${cause} as part of Hriday’s birthday celebration! 🎉\n\nI’d also love to send my personal wishes and blessings to Hriday on his special day. ❤️\n\n[Type your message here]`;
+            window.open(`https://wa.me/${number}?text=${encodeURIComponent(message)}`, "_blank");
         }
     </script>
 </body>
