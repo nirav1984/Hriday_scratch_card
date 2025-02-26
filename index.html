@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Joy of Giving</title>
+    <title>🎁 The Joy of Giving 🎁</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;600&display=swap');
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Dancing Script', cursive;
             text-align: center;
             padding: 20px;
             background: #87CEEB; /* Sky Blue */
@@ -32,32 +32,40 @@
             margin-bottom: 20px;
             line-height: 1.5;
         }
-        button {
-            background: #8B0000;
-            color: white;
-            padding: 15px;
-            font-size: 1.2em;
-            border-radius: 5px;
-            margin-top: 20px;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
+        .btn {
+            padding: 15px 20px;
+            font-size: 1.4em;
+            font-weight: bold;
             background: #B22222;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover {
+            background: #8B0000;
         }
     </style>
 </head>
 <body>
+    <!-- Background Music -->
     <audio autoplay loop>
         <source src="happy-birthday-background-music-298561.mp3" type="audio/mp3">
-        Your browser does not support the audio element.
+        Your browser does not support the audio tag.
     </audio>
-    
+
     <div class="container">
         <h1>🎁 The Joy of Giving 🎁</h1>
-        <p>Birthdays are not just about receiving but also about spreading love and kindness. Celebrate Hriday’s birthday by sharing joy with those in need.</p>
-        <p>Click below to receive a special surprise and spread happiness! 🎉</p>
-        <button onclick="location.href='scratch_card.html'">🎂 Celebrate with Hriday 🎂</button>
+        <p>Birthdays are not just about receiving but also about spreading love and kindness.  
+        Celebrate Hriday’s birthday by sharing joy with those in need.</p>
+        
+        <p>Join us in this act of kindness and make a difference!  
+        Click below to receive a special surprise and spread happiness! 🎉</p>
+
+        <a href="scratch_card.html" class="btn">🎂 Celebrate with Hriday 🎂</a>
     </div>
 </body>
 </html>
