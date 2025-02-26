@@ -95,13 +95,13 @@
     <div class="content">
         <h1>🎉 Hriday’s Birthday Scratch Card 🎉</h1>
         <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness.  
-        Scratch below to see the donation amount we will donate on your behalf!</p>
+        Scratch below to see the donation amount and cause we have donated on your behalf!</p>
 
         <div class="scratch-box" onclick="revealAmount()">Scratch Here!</div>
-        <p id="amount" class="hidden">🎁 Your donation amount: ₹<span id="donationAmount"></span> 🎁</p>
+        <p id="amount" class="hidden">We have donated ₹<span id="donationAmount"></span> for <span id="donationCause"></span> on your behalf 🎁</p>
 
         <p>Send a heartfelt message:</p>
-        <button onclick="sendMessage('9699929744')">💌 Send Message to Ekta 💌</button>
+        <button onclick="sendMessage('919699929744')">💌 Send Message to Ekta 💌</button>
         <button onclick="sendMessage('9773084403')">💌 Send Message to Nirav 💌</button>
     </div>
 
@@ -110,10 +110,24 @@
     <script>
         function revealAmount() {
             const amounts = [100, 150, 200, 250];
+            const causes = {
+                "education": "Kids' Education",
+                "elderly": "Elderly Care",
+                "animals": "Animal Shelter",
+                "general": "General Donation"
+            };
+
             const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
+            
+            // Get cause from URL (set in index page)
+            const urlParams = new URLSearchParams(window.location.search);
+            const causeKey = urlParams.get('cause') || "general";
+            const selectedCause = causes[causeKey];
+
             document.getElementById("donationAmount").innerText = randomAmount;
+            document.getElementById("donationCause").innerText = selectedCause;
             document.getElementById("amount").classList.remove("hidden");
-            document.querySelector(".scratch-box").classList.add("hidden"); // Hides scratch box
+            document.querySelector(".scratch-box").classList.add("hidden"); // Hide scratch box after clicking
         }
 
         function sendMessage(number) {
