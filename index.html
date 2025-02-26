@@ -15,61 +15,67 @@
             color: white;
         }
         .container {
-            background: #4682B4; /* Slightly Darker Blue */
+            background: #0D1B3D; /* Deep Blue */
             padding: 30px;
-            border-radius: 10px;
+            border-radius: 15px;
             display: inline-block;
-            margin-top: 20px;
-            max-width: 80%;
+            max-width: 85%;
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         h1 {
-            font-size: 2.8em;
-            margin-bottom: 10px;
+            font-size: 2.5em;
             font-family: 'Dancing Script', cursive;
+            margin-bottom: 15px;
         }
         p {
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            line-height: 1.5;
+            font-size: 1.3em;
+            line-height: 1.6;
+            margin-bottom: 15px;
         }
         select, button {
-            padding: 10px;
+            padding: 12px;
             font-size: 1.2em;
-            border-radius: 5px;
-            margin: 10px;
+            border-radius: 8px;
+            margin: 15px 0;
             border: none;
+            display: block;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
         }
         button {
-            background: #FFD700;
+            background: #A52A2A; /* Warm brown */
+            color: white;
             font-weight: bold;
+            cursor: pointer;
         }
         button:hover {
-            background: #FFA500;
+            background: #8B0000;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🎂 Let’s Celebrate with Purpose! 🎈</h1>
-        <p>🎁 As part of <strong>Hriday’s Birthday</strong>, we’re spreading joy by <strong>donating on your behalf</strong>! 🎁</p>
+        <h1>🎂 Let's Celebrate with Purpose! 🎈</h1>
+        <p>🎁 As part of <strong>Hriday’s Birthday</strong>, we’re spreading joy by <strong>donating on your behalf!</strong> 🎁</p>
         <p>📢 <strong>Select a cause that speaks to your heart</strong> and be part of something <strong>bigger than just a celebration!</strong> 🎊</p>
         <p>💡 Small acts create <strong>big change</strong>—let’s make a difference together! 🌍</p>
-        <p>Select where you'd like the donation to go:</p>
+        
+        <label for="cause">Select where you'd like the donation to go:</label>
         <select id="cause">
             <option value="education">📚 Kids' Education</option>
             <option value="elderly">🏡 Elderly Care</option>
             <option value="animals">🐶 Animal Shelter</option>
             <option value="general">💖 General Donation</option>
         </select>
-        <br>
-        <button onclick="redirectToScratchCard()">🎂 Celebrate with Hriday 🎂</button>
+        
+        <button onclick="goToScratchPage()">🎂 Celebrate with Hriday 🎂</button>
     </div>
-    <audio autoplay loop>
-        <source src="happy-birthday-background-music-298561.mp3" type="audio/mp3">
-    </audio>
+    
     <script>
-        function redirectToScratchCard() {
-            window.location.href = "scratch_card.html";
+        function goToScratchPage() {
+            window.location.href = 'scratch_card.html';
         }
     </script>
 </body>
