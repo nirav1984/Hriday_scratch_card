@@ -15,6 +15,21 @@
             position: relative;
         }
 
+        /* Overlay to improve text readability */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3); /* Slight overlay */
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
         h1 {
             font-family: 'Dancing Script', cursive;
             font-size: 2.8em;
@@ -29,25 +44,26 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
 
-        /* **Scratchable Area** */
-        .scratch-container {
-            position: relative;
-            width: 250px;
+        /* Scratch Box */
+        .scratch-box {
+            background: gray;
+            width: 220px;
             height: 100px;
-            margin: 20px auto;
-        }
-
-        canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            cursor: pointer;
+            display: inline-block;
+            margin: 15px 0;
+            color: black;
+            font-size: 1.8em;
+            font-weight: bold;
+            line-height: 100px;
+            text-align: center;
+            border-radius: 10px;
         }
 
         .hidden {
             visibility: hidden;
         }
 
+        /* Button Styles */
         button {
             padding: 12px 20px;
             font-size: 1.2em;
@@ -74,16 +90,14 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="overlay"></div>
+    <div class="content">
         <h1>🎉 Hriday’s Birthday Scratch Card 🎉</h1>
         <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness.  
         Scratch below to see the donation amount we will donate on your behalf!</p>
 
-        <!-- Scratch-off Effect -->
-        <div class="scratch-container">
-            <canvas id="scratchCard" width="250" height="100"></canvas>
-            <p id="amount" class="hidden">🎁 Your donation amount: ₹<span id="donationAmount"></span> 🎁</p>
-        </div>
+        <div class="scratch-box" onclick="revealAmount()">Scratch Here!</div>
+        <p id="amount" class="hidden">🎁 Your donation amount: ₹<span id="donationAmount"></span> 🎁</p>
 
         <p>Send a heartfelt message:</p>
         <button onclick="sendMessage('9699929744')">💌 Send Message to Ekta 💌</button>
@@ -93,38 +107,12 @@
     <audio id="birthdaySong" src="happy-birthday-background-music-298561.mp3" autoplay></audio>
 
     <script>
-        // Scratch Card Effect
-        const canvas = document.getElementById('scratchCard');
-        const ctx = canvas.getContext('2d');
-        let isScratching = false;
-
-        // Fill the canvas with gray scratch-off layer
-        ctx.fillStyle = "gray";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        canvas.addEventListener('mousedown', () => isScratching = true);
-        canvas.addEventListener('mouseup', () => isScratching = false);
-        canvas.addEventListener('mousemove', scratch);
-
-        function scratch(event) {
-            if (!isScratching) return;
-            const rect = canvas.getBoundingClientRect();
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
-            ctx.globalCompositeOperation = 'destination-out';
-            ctx.arc(x, y, 15, 0, Math.PI * 2);
-            ctx.fill();
-        }
-
-        // Reveal donation amount
         function revealAmount() {
             const amounts = [100, 150, 200, 250];
             const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
             document.getElementById("donationAmount").innerText = randomAmount;
             document.getElementById("amount").classList.remove("hidden");
         }
-
-        canvas.addEventListener('mouseup', revealAmount);
 
         function sendMessage(number) {
             const message = encodeURIComponent("I just participated in Hriday’s birthday donation! 🎉 Thank you for this beautiful initiative! 💖");
