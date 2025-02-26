@@ -3,86 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎁 The Joy of Giving 🎁</title>
+    <title>🎂 The Joy of Giving 🎂</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;600&display=swap');
-
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             text-align: center;
-            padding: 20px;
-            background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center/cover;
+            background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: white;
+            margin: 0;
+            padding: 0;
         }
-
         .overlay {
             background: rgba(0, 0, 0, 0.6);
-            padding: 30px;
+            padding: 20px;
             border-radius: 10px;
-            display: inline-block;
-            margin-top: 20px;
-            max-width: 90%;
+            margin: 30px;
         }
-
-        h1 {
-            font-size: 2.8em;
-            margin-bottom: 10px;
-        }
-
-        p {
-            font-size: 1.4em;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
         select, button {
             padding: 10px;
-            font-size: 1.2em;
+            font-size: 16px;
+            border: none;
             border-radius: 5px;
             margin: 10px;
-            border: none;
         }
-
         button {
-            background: #FFA500;
-            font-weight: bold;
+            background-color: #ff4500;
             color: white;
+            cursor: pointer;
         }
-
         button:hover {
-            background: #FF4500;
+            background-color: #e03e00;
+        }
+        audio {
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="overlay">
-        <h1>🎂 Let’s Celebrate with Purpose! 🎈</h1>
-        <p>🎁 As part of <strong>Hriday’s Birthday</strong>, we’re spreading joy by <strong>donating on your behalf</strong>!</p>
-        <p>📢 <strong>Select a cause</strong> that speaks to your heart and be part of something <strong>bigger than just a celebration!</strong> 🎊</p>
-
-        <p>💡 Small acts create <strong>big change</strong>—let’s make a difference together! 🌍</p>
-
-        <p>Select where you'd like the donation to go:</p>
-        <select id="cause" onchange="storeCause()">
-            <option value="education">📚 Kids' Education</option>
-            <option value="elderly">🏡 Elderly Care</option>
-            <option value="animals">🐶 Animal Shelter</option>
-            <option value="general">💖 General Donation</option>
-        </select>
+        <h1>🎂 Let's Celebrate with Purpose! 🎂</h1>
+        <p>🎁 As part of Hriday’s Birthday, we’re spreading joy by **donating on your behalf**! 🎁</p>
+        <p>📢 **Select a cause** that speaks to your heart and be part of something **bigger than just a celebration!** 🎊</p>
+        <p>💡 Small acts create **big change**—let’s make a difference together! 🌍</p>
         
-        <button onclick="redirectToScratchCard()">🎂 Celebrate with Hriday 🎂</button>
+        <p>Select where you'd like the donation to go:</p>
+        <select id="cause">
+            <option value="education">📚 Kids' Education</option>
+            <option value="elderly">👴 Elderly Care</option>
+            <option value="animals">🐶 Animal Shelter</option>
+            <option value="general">❤️ General Donation</option>
+        </select>
+        <br>
+        <button onclick="proceedToScratch()">🎂 Celebrate with Hriday 🎂</button>
     </div>
 
-    <audio id="birthdayAudio" src="happy-birthday-background-music-298561.mp3" loop></audio>
+    <audio id="bgMusic" loop>
+        <source src="happy-birthday-background-music-298561.mp3" type="audio/mp3">
+    </audio>
 
     <script>
-        function storeCause() {
+        function proceedToScratch() {
             const selectedCause = document.getElementById("cause").value;
             sessionStorage.setItem("selectedCause", selectedCause);
-            document.getElementById("birthdayAudio").play();
-        }
-
-        function redirectToScratchCard() {
+            document.getElementById("bgMusic").play();
             window.location.href = "scratch_card.html";
         }
     </script>
