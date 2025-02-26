@@ -81,7 +81,8 @@
 
         <p><strong>Cause Selected:</strong> <span id="selectedCause"></span></p>
 
-        <button onclick="sendMessage()">💌 Send a heartfelt message to Nirav/Ekta</button>
+        <button onclick="sendMessage('919699929744')">💌 Send a heartfelt message to Ekta</button>
+        <button onclick="sendMessage('919773084403')">💌 Send a heartfelt message to Nirav</button>
     </div>
 
     <script>
@@ -93,11 +94,11 @@
             document.getElementById("amount").classList.remove("hidden");
         }
 
-        function sendMessage() {
+        function sendMessage(phoneNumber) {
             const selectedCause = localStorage.getItem("selectedCause") || "a cause";
             const donationAmount = document.getElementById("donationAmount").textContent;
             const message = `Happy Birthday Hriday! 🎉 I have chosen to donate ₹${donationAmount} to ${selectedCause}.`;
-            window.open(`https://api.whatsapp.com/send?phone=919699929744&text=${encodeURIComponent(message)}`, "_blank");
+            window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`, "_blank");
         }
 
         // Load the selected cause from index.html
