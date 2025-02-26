@@ -49,14 +49,12 @@
         .hidden {
             visibility: hidden;
         }
-        select, button {
+        button {
             padding: 10px;
             font-size: 1.2em;
             border-radius: 5px;
-            margin: 10px;
             border: none;
-        }
-        button {
+            margin-top: 15px;
             background: #FFD700;
             font-weight: bold;
             cursor: pointer;
@@ -67,6 +65,7 @@
     </style>
 </head>
 <body>
+
     <!-- Background Music -->
     <audio autoplay loop>
         <source src="happy-birthday-background-music-298561.mp3" type="audio/mp3">
@@ -75,20 +74,13 @@
 
     <div class="container">
         <h1>🎉 Hriday’s Birthday Scratch Card 🎉</h1>
-        <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness.  
-        Scratch below to see the donation amount we will donate on your behalf!</p>
+        <p>Thank you for celebrating with Hriday! Scratch below to see the donation amount.</p>
 
         <div class="scratch-box" onclick="revealAmount()">Scratch Here!</div>
         <p id="amount" class="hidden">🎁 Your donation amount: ₹<span id="donationAmount"></span> 🎁</p>
 
-        <p>Select where you'd like to donate:</p>
-        <select id="cause">
-            <option value="education">📚 Kids' Education</option>
-            <option value="elderly">🏡 Elderly Care</option>
-            <option value="animals">🐶 Animal Shelter</option>
-            <option value="general">💖 General Donation</option>
-        </select>
-        
+        <p><strong>Cause Selected:</strong> <span id="selectedCause"></span></p>
+
         <button onclick="sendMessage()">💌 Send a heartfelt message to Nirav/Ekta</button>
     </div>
 
@@ -102,12 +94,14 @@
         }
 
         function sendMessage() {
-            const selectedCause = document.getElementById("cause").value;
+            const selectedCause = localStorage.getItem("selectedCause") || "a cause";
             const donationAmount = document.getElementById("donationAmount").textContent;
-            const message = `Happy Birthday Hriday! 🎉 I have chosen to donate ₹${donationAmount} to ${selectedCause} as part of this wonderful celebration!`;
-            const whatsappURL = `https://api.whatsapp.com/send?phone=+919999999999&text=${encodeURIComponent(message)}`;
-            window.open(whatsappURL, "_blank");
+            const message = `Happy Birthday Hriday! 🎉 I have chosen to donate ₹${donationAmount} to ${selectedCause}.`;
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`, "_blank");
         }
+
+        // Load the selected cause from index.html
+        document.getElementById("selectedCause").textContent = localStorage.getItem("selectedCause") || "Not Selected";
     </script>
 </body>
 </html>
