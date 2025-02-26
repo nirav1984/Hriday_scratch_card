@@ -71,7 +71,7 @@
         Scratch below to see the donation amount we will donate on your behalf!</p>
 
         <div class="scratch-box" onclick="revealAmount()">Scratch Here!</div>
-        <p id="amount" class="hidden">🎁 Your donation amount: ₹100 🎁</p>
+        <p id="amount" class="hidden">🎁 Your donation amount: ₹<span id="donationValue"></span> 🎁</p>
 
         <p>Select where you'd like to donate:</p>
         <select id="cause">
@@ -87,6 +87,8 @@
 
     <script>
         function revealAmount() {
+            let donationValue = Math.floor(Math.random() * (250 - 100 + 1)) + 100;
+            document.getElementById("donationValue").textContent = donationValue;
             document.querySelector(".scratch-box").style.display = "none";
             document.getElementById("amount").classList.remove("hidden");
         }
