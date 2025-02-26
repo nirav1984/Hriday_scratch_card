@@ -48,10 +48,22 @@
     </style>
 </head>
 <body>
-    <audio id="bg-music" loop autoplay>
-        <source src="happy-birthday-background-music-298561.mp3" type="audio/mpeg">
+
+    <!-- Background Music -->
+    <audio id="birthdayMusic" loop>
+        <source src="happy-birthday-background-music-298561.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
+
+    <script>
+        // Play music as soon as the user interacts with the page
+        document.addEventListener("click", function () {
+            let audio = document.getElementById("birthdayMusic");
+            if (audio.paused) {
+                audio.play().catch(error => console.log("Autoplay blocked:", error));
+            }
+        });
+    </script>
 
     <div class="container">
         <h1>🎁 The Joy of Giving 🎁</h1>
@@ -60,5 +72,6 @@
         <p>Click below to receive a special surprise and spread happiness! 🎉</p>
         <button onclick="window.location.href='scratch_card.html'">🎂 Celebrate with Hriday 🎂</button>
     </div>
+
 </body>
 </html>
