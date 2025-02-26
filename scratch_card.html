@@ -3,91 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hriday's Birthday Scratch Card</title>
+    <title>🎉 Hriday's Birthday Scratch Card 🎉</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             text-align: center;
-            margin: 0;
-            padding: 0;
             background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center fixed;
             background-size: cover;
             color: white;
+            padding: 20px;
         }
         .overlay {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             padding: 20px;
             border-radius: 10px;
-            margin: 20px;
-        }
-        .container {
-            max-width: 90%;
-            margin: auto;
-            padding: 20px;
-        }
-        .scratch-area {
-            background: #ccc;
-            padding: 20px;
-            border-radius: 10px;
-            cursor: pointer;
             display: inline-block;
-            margin-top: 20px;
         }
-        .hidden-text {
-            display: none;
+        button {
+            background-color: #ff9800;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .scratch-box {
+            margin: 20px auto;
+            width: 80%;
+            height: 100px;
+            background: gray;
+            text-align: center;
+            line-height: 100px;
             font-size: 20px;
             font-weight: bold;
-            margin-top: 20px;
-        }
-        .btn {
-            display: block;
-            width: 80%;
-            margin: 10px auto;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background: goldenrod;
             color: white;
-            font-size: 18px;
+            border-radius: 5px;
+            user-select: none;
             cursor: pointer;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="container overlay">
+    <div class="overlay">
         <h1>🎉 Hriday's Birthday Scratch Card 🎉</h1>
-        <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness. Scratch below to see the donation amount and cause we will donate on your behalf!</p>
-        <div class="scratch-area" onclick="revealDonation()">Scratch Here</div>
-        <p class="hidden-text" id="donationText"></p>
-        <h3>Send a heartfelt message to:</h3>
-        <button class="btn" onclick="sendMessage('9773084403')">📩 Message Nirav</button>
-        <button class="btn" onclick="sendMessage('919699929744')">📩 Message Ekta</button>
+        <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness.</p>
+        <p>Scratch below to see the donation amount and cause we will donate on your behalf!</p>
+
+        <div class="scratch-box" id="scratchBox" onclick="revealDonation()">Scratch Here!</div>
+        <p id="donationText" class="hidden"></p>
+
+        <p>Send a heartfelt message to:</p>
+        <button onclick="sendMessage('Nirav')">📧 Message Nirav</button>
+        <button onclick="sendMessage('Ekta')">📧 Message Ekta</button>
     </div>
 
     <script>
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
-        
         function revealDonation() {
-            const scratchArea = document.querySelector('.scratch-area');
-            const donationText = document.getElementById('donationText');
-            const donationAmounts = [100, 150, 200, 250];
-            const selectedAmount = donationAmounts[Math.floor(Math.random() * donationAmounts.length)];
-            const selectedCause = getQueryParam('cause') || 'a meaningful cause';
-            
-            donationText.innerHTML = `🎁 We will donate ₹${selectedAmount} for ${selectedCause} 🎁`;
-            donationText.style.display = 'block';
-            scratchArea.style.display = 'none';
+            let selectedCause = localStorage.getItem("selectedCause");
+            if (!selectedCause) {
+                alert("No cause selected! Redirecting back to the selection page.");
+                window.location.href = "index.html";
+                return;
+            }
+
+            let donationAmount = getRandomDonation();
+            let message = `🎁 We will donate ₹${donationAmount} for ${selectedCause} 🎁`;
+
+            document.getElementById("donationText").innerText = message;
+            document.getElementById("donationText").classList.remove("hidden");
+            document.getElementById("scratchBox").classList.add("hidden"); // Hide Scratch Here button
         }
-        
-        function sendMessage(number) {
-            const selectedCause = getQueryParam('cause') || 'a meaningful cause';
-            const donationAmounts = [100, 150, 200, 250];
-            const selectedAmount = donationAmounts[Math.floor(Math.random() * donationAmounts.length)];
-            const message = `I'm celebrating Hriday's birthday with joy and kindness! A donation of ₹${selectedAmount} has been pledged on my behalf for ${selectedCause}. Wishing Hriday a very Happy Birthday! 🎉`;
-            window.location.href = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+
+        function getRandomDonation() {
+            let amounts = [100, 150, 200, 250];
+            return amounts[Math.floor(Math.random() * amounts.length)];
+        }
+
+        function sendMessage(recipient) {
+            let selectedCause = localStorage.getItem("selectedCause");
+            let donationAmount = getRandomDonation();
+            let message = `Hey! kindly contribute ₹${donationAmount} for ${selectedCause} in celebration of Hriday's birthday. Please share our blessings and best wishes for him too! 🎉🥳`;
+            let phoneNumber = recipient === "Nirav" ? "919773084403" : "919699929744"; // Add country code
+
+            let whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, "_blank");
         }
     </script>
 </body>
