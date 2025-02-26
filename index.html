@@ -8,28 +8,29 @@
         body {
             font-family: 'Arial', sans-serif;
             text-align: center;
-            background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center/cover;
+            background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: white;
-            padding: 20px;
+            margin: 0;
+            padding: 0;
         }
-
         .overlay {
             background: rgba(0, 0, 0, 0.5);
             padding: 20px;
-            border-radius: 15px;
-            display: inline-block;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            margin: 50px auto;
         }
-
         select, button {
-            margin: 10px;
-            padding: 10px;
             font-size: 18px;
+            padding: 10px;
+            margin-top: 10px;
             border-radius: 5px;
             border: none;
         }
-
         button {
-            background-color: orange;
+            background-color: #ff9800;
             color: white;
             cursor: pointer;
         }
@@ -38,26 +39,28 @@
 <body>
     <div class="overlay">
         <h1>🎂 Let's Celebrate with Purpose! 🎈</h1>
-        <p>🎁 As part of <strong>Hriday’s Birthday</strong>, we’re spreading joy by <strong>donating on your behalf!</strong> 🎁</p>
-        <p>📢 Select a cause that speaks to your heart and be part of something bigger than just a celebration! 🎊</p>
+        <p>🎁 <b>Birthdays are not just about receiving, but also about giving! 💖</b></p>
+        <p>As part of <b>Hriday’s Birthday 🎊</b>, we’re spreading joy beyond gifts and celebrations by <b>donating on your behalf 🎁</b> to a meaningful cause! 🌍✨</p>
+        <p>💖 <b>A simple act of kindness can make a world of difference 🌟</b>—whether it's helping a child receive an education 📚, bringing a smile to an elderly person 👴, supporting an animal in need 🐶, or contributing to a greater cause 🎗.</p>
+        <p>🌟 <b>Your choice today creates a ripple effect of goodness! 🌊💛</b></p>
+        <p>📢 <b>Select a cause that speaks to your heart ❤️</b> and join us in <b>spreading love, hope, and happiness 😍</b> to those who need it the most. Because the best way to celebrate is by <b>giving back 🎊 and making a difference! 🎉</b></p>
+        <p>✨ <b>Together, let’s make this birthday a celebration of kindness! 🎂🎊</b> ✨</p>
         
-        <label for="causeSelection">Select where you'd like the donation to go:</label>
-        <select id="causeSelection">
+        <label for="cause">📌 Select a cause:</label>
+        <select id="cause">
             <option value="Kids' Education">📚 Kids' Education</option>
-            <option value="Elderly Care">👵 Elderly Care</option>
+            <option value="Elderly Care">👴 Elderly Care</option>
             <option value="Animal Shelter">🐶 Animal Shelter</option>
-            <option value="General Donation">🤝 General Donation</option>
+            <option value="General Donation">🎗 General Donation</option>
         </select>
-        
         <br>
-        <button onclick="proceedToScratchCard()">🎂 Celebrate with Hriday 🎂</button>
+        <button onclick="proceed()">🎂 Celebrate with Hriday 🎂</button>
     </div>
-
     <script>
-        function proceedToScratchCard() {
-            let selectedCause = document.getElementById("causeSelection").value;
-            localStorage.setItem("selectedCause", selectedCause); // Store selected cause
-            window.location.href = "scratch_card.html"; // Redirect
+        function proceed() {
+            let selectedCause = document.getElementById("cause").value;
+            localStorage.setItem("selectedCause", selectedCause);
+            window.location.href = "scratch_card.html";
         }
     </script>
 </body>
