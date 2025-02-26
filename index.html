@@ -5,85 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎁 The Joy of Giving 🎁</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;600&display=swap');
-
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Arial', sans-serif;
             text-align: center;
-            padding: 20px;
             background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center/cover;
             color: white;
+            padding: 20px;
         }
 
         .overlay {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 30px;
-            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 15px;
             display: inline-block;
-            margin-top: 20px;
-            max-width: 90%;
-        }
-
-        h1 {
-            font-size: 2.8em;
-            margin-bottom: 10px;
-        }
-
-        p {
-            font-size: 1.4em;
-            margin-bottom: 20px;
-            line-height: 1.5;
         }
 
         select, button {
-            padding: 10px;
-            font-size: 1.2em;
-            border-radius: 5px;
             margin: 10px;
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
             border: none;
         }
 
         button {
-            background: #FFA500;
-            font-weight: bold;
+            background-color: orange;
             color: white;
-        }
-
-        button:hover {
-            background: #FF4500;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <div class="overlay">
-        <h1>🎂 Let’s Celebrate with Purpose! 🎈</h1>
-        <p>🎁 As part of <strong>Hriday’s Birthday</strong>, we’re spreading joy by <strong>donating on your behalf</strong>!</p>
-        <p>📢 <strong>Select a cause</strong> that speaks to your heart and be part of something <strong>bigger than just a celebration!</strong> 🎊</p>
-
-        <p>💡 Small acts create <strong>big change</strong>—let’s make a difference together! 🌍</p>
-
-        <p>Select where you'd like the donation to go:</p>
-        <select id="cause" onchange="storeCause()">
-            <option value="education">📚 Kids' Education</option>
-            <option value="elderly">🏡 Elderly Care</option>
-            <option value="animals">🐶 Animal Shelter</option>
-            <option value="general">💖 General Donation</option>
+        <h1>🎂 Let's Celebrate with Purpose! 🎈</h1>
+        <p>🎁 As part of <strong>Hriday’s Birthday</strong>, we’re spreading joy by <strong>donating on your behalf!</strong> 🎁</p>
+        <p>📢 Select a cause that speaks to your heart and be part of something bigger than just a celebration! 🎊</p>
+        
+        <label for="causeSelection">Select where you'd like the donation to go:</label>
+        <select id="causeSelection">
+            <option value="Kids' Education">📚 Kids' Education</option>
+            <option value="Elderly Care">👵 Elderly Care</option>
+            <option value="Animal Shelter">🐶 Animal Shelter</option>
+            <option value="General Donation">🤝 General Donation</option>
         </select>
         
-        <button onclick="redirectToScratchCard()">🎂 Celebrate with Hriday 🎂</button>
+        <br>
+        <button onclick="proceedToScratchCard()">🎂 Celebrate with Hriday 🎂</button>
     </div>
 
-    <audio id="birthdayAudio" src="happy-birthday-background-music-298561.mp3" loop></audio>
-
     <script>
-        function storeCause() {
-            const selectedCause = document.getElementById("cause").value;
-            sessionStorage.setItem("selectedCause", selectedCause);
-            document.getElementById("birthdayAudio").play();
-        }
-
-        function redirectToScratchCard() {
-            window.location.href = "scratch_card.html";
+        function proceedToScratchCard() {
+            let selectedCause = document.getElementById("causeSelection").value;
+            localStorage.setItem("selectedCause", selectedCause); // Store selected cause
+            window.location.href = "scratch_card.html"; // Redirect
         }
     </script>
 </body>
