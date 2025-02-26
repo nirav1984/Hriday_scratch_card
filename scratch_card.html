@@ -74,6 +74,7 @@
         <h1>🎉 Hriday's Birthday Scratch Card 🎉</h1>
         <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness.</p>
         <p>🎈 Scratch below to see the donation amount and cause we will donate on your behalf!</p>
+
         <div class="scratch-box" onclick="revealDonation()">🎁 Scratch Here 🎁</div>
 
         <div id="amount" class="hidden">
@@ -109,8 +110,8 @@
         function sendMessage(phone) {
             const amount = document.getElementById("donationAmount").innerText;
             const cause = document.getElementById("donationCause").innerText;
-            const message = `Hi! Thank you for celebrating Hriday's birthday. please donate ₹${amount} for ${cause} on our behalf. We send your blessings & wishes for Hriday!`;
-            window.location.href = `https://wa.me/${phone}?text=${encodeURIComoponent(message)}`;
+            const message = `Wr wish Hriday on his birthday. Kindly donate ₹${amount} for ${cause} on our behalf. Our blessings & wishes for Hriday!`;
+            window.location.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
         }
     </script>
 </body>
