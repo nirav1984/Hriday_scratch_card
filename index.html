@@ -8,17 +8,18 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;600&display=swap');
 
+        /* Full-page Background */
         body {
             font-family: 'Dancing Script', cursive;
             text-align: center;
             padding: 20px;
-            background: url('https://raw.githubusercontent.com/nirav1984/hriday_scratch_card/main/FB_IMG_16813165960.jpg') no-repeat center center fixed;
+            background: url('https://raw.githubusercontent.com/nirav1984/hriday_scratch_card/main/FB_IMG_1681316596026~2.jpg') no-repeat center center fixed;
             background-size: cover;
             position: relative;
             color: white;
         }
 
-        /* Overlay to make the image very transparent */
+        /* Soft Overlay to Improve Readability */
         body::before {
             content: "";
             position: absolute;
@@ -26,17 +27,17 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6); /* Adjust transparency here */
+            background: rgba(0, 0, 0, 0.2); /* Lighter overlay */
             z-index: -1;
         }
 
         .container {
-            background: rgba(0, 0, 0, 0.6); /* Darkened background for content */
+            background: rgba(0, 0, 0, 0.5); /* Light Black Overlay */
             padding: 30px;
             border-radius: 10px;
             display: inline-block;
             margin-top: 20px;
-            max-width: 80%;
+            max-width: 90%;
             box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.2);
         }
 
@@ -70,7 +71,7 @@
             background: #FFA500;
         }
 
-        /* Audio hidden but auto-playing */
+        /* Audio Hidden But Auto-Playing */
         audio {
             display: none;
         }
