@@ -75,8 +75,8 @@
         <p id="amount" class="hidden">🎁 We will donate ₹<span id="donationAmount"></span> for <span id="donationCause"></span> 🎁</p>
 
         <p>Send a heartfelt message to:</p>
-        <button onclick="sendWhatsAppMessage('9773084403')">📩 Message Nirav</button>
-        <button onclick="sendWhatsAppMessage('919699929744')">📩 Message Ekta</button>
+        <button onclick="sendWhatsAppMessage('9773084403', 'Nirav')">📩 Message Nirav</button>
+        <button onclick="sendWhatsAppMessage('919699929744', 'Ekta')">📩 Message Ekta</button>
     </div>
 
     <script>
@@ -95,10 +95,10 @@
             document.getElementById("amount").classList.remove("hidden");
         }
 
-        function sendWhatsAppMessage(number) {
+        function sendWhatsAppMessage(number, recipient) {
             const amount = document.getElementById("donationAmount").textContent;
             const cause = document.getElementById("donationCause").textContent;
-            const message = `Hi, a donation of ₹${amount} will be made on my behalf for ${cause} as part of Hriday’s birthday celebration! 🎉\n\nI’d also love to send my personal wishes and blessings to Hriday on his special day. ❤️\n\n[Type your message here]`;
+            const message = `Hi ${recipient}, a donation of ₹${amount} will be made on my behalf for ${cause} as part of Hriday’s birthday celebration! 🎉\n\nI’d also love to send my personal wishes and blessings to Hriday on his special day. ❤️\n\n[Type your message here]`;
             window.open(`https://wa.me/${number}?text=${encodeURIComponent(message)}`, "_blank");
         }
     </script>
