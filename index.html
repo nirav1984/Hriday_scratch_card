@@ -21,7 +21,6 @@
             display: inline-block;
             margin-top: 20px;
             max-width: 85%;
-            text-align: justify; /* Justified text */
         }
         h1 {
             font-size: 2.5em;
@@ -31,68 +30,4 @@
             font-size: 1.4em;
             margin-bottom: 15px;
             line-height: 1.6;
-            text-align: justify;
-        }
-        select, button {
-            padding: 12px;
-            font-size: 1.2em;
-            border-radius: 5px;
-            margin: 10px;
-            border: none;
-        }
-        select {
-            width: 80%;
-            display: block;
-            margin: auto;
-        }
-        button {
-            background: #8B0000;
-            color: white;
-            font-weight: bold;
-            width: 85%;
-            display: block;
-            margin: 20px auto;
-        }
-        button:hover {
-            background: #A52A2A;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>🎂 Let's Celebrate with Purpose! 🎈</h1>
-        <p>🎁 As part of <strong>Hriday’s Birthday</strong>, we’re spreading joy by <strong>donating on your behalf</strong>! 🎁</p>
-
-        <p>📢 <strong>Select a cause</strong> that speaks to your heart and be part of something <strong>bigger than just a celebration!</strong> 🎊</p>
-
-        <p>💡 Small acts create <strong>big change</strong>—let’s make a difference together! 🌍</p>
-
-        <label for="cause">Select where you'd like the donation to go:</label>
-        <select id="cause" onchange="playMusic()">
-            <option value="">🎗️ Choose a Cause</option>
-            <option value="education">📚 Kids' Education</option>
-            <option value="elderly">🏡 Elderly Care</option>
-            <option value="animals">🐶 Animal Shelter</option>
-            <option value="general">💖 General Donation</option>
-        </select>
-        
-        <button onclick="goToScratchCard()">🎂 Celebrate with Hriday 🎂</button>
-    </div>
-
-    <audio id="birthdayMusic" loop>
-        <source src="happy-birthday-background-music-298561.mp3" type="audio/mp3">
-    </audio>
-
-    <script>
-        function playMusic() {
-            var music = document.getElementById("birthdayMusic");
-            if (!music.paused) return; // Prevent restarting if already playing
-            music.play().catch(error => console.log("Autoplay prevented:", error));
-        }
-
-        function goToScratchCard() {
-            window.location.href = "scratch_card.html";
-        }
-    </script>
-</body>
-</html>
+            text-align: center
