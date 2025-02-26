@@ -8,77 +8,93 @@
         body {
             font-family: 'Arial', sans-serif;
             text-align: center;
-            margin: 0;
-            padding: 0;
             background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center fixed;
             background-size: cover;
             color: white;
+            margin: 0;
+            padding: 0;
         }
         .overlay {
             background: rgba(0, 0, 0, 0.6);
             padding: 20px;
             border-radius: 10px;
-            margin: 20px;
+            max-width: 90%;
+            margin: auto;
+            margin-top: 20px;
         }
-        .card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            display: inline-block;
-        }
-        .scratch-box {
+        .scratch-area {
             background: gray;
-            color: gray;
+            width: 80%;
+            margin: auto;
             padding: 20px;
             border-radius: 10px;
             cursor: pointer;
-        }
-        .hidden {
-            display: none;
-        }
-        button {
-            background: #d4a017;
+            font-size: 24px;
+            font-weight: bold;
             color: white;
-            border: none;
+        }
+        .hidden-message {
+            display: none;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .message-buttons {
+            margin-top: 20px;
+        }
+        .btn {
+            background-color: #b8860b;
+            color: white;
             padding: 10px 20px;
-            margin: 10px;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 18px;
+            display: block;
+            margin: 10px auto;
+            width: 60%;
         }
     </style>
-    <script>
-        function revealDonation() {
-            var amounts = [100, 150, 200, 250];
-            var randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
-            var selectedCause = localStorage.getItem('selectedCause') || 'a meaningful cause';
-            
-            document.getElementById("scratch-box").classList.add("hidden");
-            document.getElementById("donation-amount").innerHTML = `🎁 We will donate ₹${randomAmount} for ${selectedCause} 🎁`;
-            document.getElementById("donation-amount").classList.remove("hidden");
-        }
-        
-        function sendMessageTo(number) {
-            var selectedCause = localStorage.getItem('selectedCause') || 'a meaningful cause';
-            var amount = document.getElementById("donation-amount").textContent.match(/\d+/)[0] || '100';
-            
-            var message = encodeURIComponent(`Hi! As part of Hriday's birthday celebration, a donation of ₹${amount} is being made towards ${selectedCause}. Join us in spreading joy!`);
-            window.location.href = `https://wa.me/${number}?text=${message}`;
-        }
-    </script>
 </head>
 <body>
     <div class="overlay">
         <h1>🎉 Hriday's Birthday Scratch Card 🎉</h1>
         <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness. Scratch below to see the donation amount and cause we will donate on your behalf!</p>
-        
-        <div class="card">
-            <div id="scratch-box" class="scratch-box" onclick="revealDonation()">Scratch Here!</div>
-            <p id="donation-amount" class="hidden"></p>
+        <div class="scratch-area" onclick="revealMessage()">Scratch Here</div>
+        <p class="hidden-message" id="donationMessage"></p>
+        <div class="message-buttons">
+            <button class="btn" onclick="sendWhatsApp('Nirav', '9773084403')">📩 Message Nirav</button>
+            <button class="btn" onclick="sendWhatsApp('Ekta', '919699929744')">📩 Message Ekta</button>
         </div>
-        
-        <p>Send a heartfelt message to:</p>
-        <button onclick="sendMessageTo('919773084403')">📩 Message Nirav</button>
-        <button onclick="sendMessageTo('919699929744')">📩 Message Ekta</button>
     </div>
+
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function revealMessage() {
+            const causes = {
+                "education": "Kids' Education",
+                "orphanage": "Orphanage",
+                "animals": "Animal Shelter",
+                "elderly": "Elderly Care"
+            };
+            const donationAmounts = [100, 150, 200, 250];
+            const selectedCause = getQueryParam('cause') || 'education';
+            const randomAmount = donationAmounts[Math.floor(Math.random() * donationAmounts.length)];
+            document.getElementById("donationMessage").innerHTML = `🎁 We will donate ₹${randomAmount} for ${causes[selectedCause]} 🎁`;
+            document.getElementById("donationMessage").style.display = "block";
+            document.querySelector(".scratch-area").style.display = "none";
+        }
+
+        function sendWhatsApp(name, number) {
+            const selectedCause = getQueryParam('cause') || 'education';
+            const donationMessage = document.getElementById("donationMessage").innerText;
+            let message = `Hi ${name}, I am grateful to be part of Hriday's birthday celebration. ${donationMessage}. I send my best wishes and blessings to Hriday! 🎉🎂`;
+            window.open(`https://wa.me/${number}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+    </script>
 </body>
 </html>
