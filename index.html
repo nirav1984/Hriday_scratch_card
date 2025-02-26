@@ -54,7 +54,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="setDefaultCause()">
     <div class="overlay">
         <h1>🎂 Let’s Celebrate with Purpose! 🎈</h1>
         <p>🎁 As part of <strong>Hriday’s Birthday</strong>, we’re spreading joy by <strong>donating on your behalf</strong>!</p>
@@ -76,6 +76,12 @@
     <audio id="birthdayAudio" src="happy-birthday-background-music-298561.mp3" loop></audio>
 
     <script>
+        function setDefaultCause() {
+            if (!sessionStorage.getItem("selectedCause")) {
+                sessionStorage.setItem("selectedCause", "education");  // Ensure default is always set
+            }
+        }
+
         function storeCause() {
             const selectedCause = document.getElementById("cause").value;
             sessionStorage.setItem("selectedCause", selectedCause);
@@ -83,6 +89,9 @@
         }
 
         function redirectToScratchCard() {
+            if (!sessionStorage.getItem("selectedCause")) {
+                sessionStorage.setItem("selectedCause", document.getElementById("cause").value);
+            }
             window.location.href = "scratch_card.html";
         }
     </script>
