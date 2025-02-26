@@ -8,7 +8,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;600&display=swap');
 
         body {
-            font-family: 'Dancing Script', cursive;
+            font-family: 'Poppins', sans-serif;
             text-align: center;
             padding: 20px;
             background: #87CEEB; /* Sky Blue */
@@ -25,71 +25,52 @@
         h1 {
             font-size: 2.8em;
             margin-bottom: 10px;
+            font-family: 'Dancing Script', cursive;
         }
         p {
             font-size: 1.5em;
-            font-family: 'Poppins', sans-serif;
             margin-bottom: 20px;
             line-height: 1.5;
         }
         select, button {
             padding: 10px;
-            font-size: 1.4em;
+            font-size: 1.2em;
             border-radius: 5px;
+            margin: 10px;
             border: none;
-            margin-top: 15px;
         }
         button {
-            background: #FF4500;
-            color: white;
+            background: #FFD700;
             font-weight: bold;
-            cursor: pointer;
         }
         button:hover {
-            background: #FF6347;
+            background: #FFA500;
         }
     </style>
 </head>
 <body>
-
-    <!-- Background Music -->
-    <audio id="birthdayMusic" loop>
-        <source src="happy-birthday-background-music-298561.mp3" type="audio/mp3">
-        Your browser does not support the audio tag.
-    </audio>
-
-    <script>
-        function playMusic() {
-            let audio = document.getElementById("birthdayMusic");
-            if (audio.paused) {
-                audio.play().catch(error => console.log("Autoplay blocked:", error));
-            }
-        }
-
-        function proceedToScratchCard() {
-            let selectedCause = document.getElementById("causeSelection").value;
-            localStorage.setItem("selectedCause", selectedCause); // Store cause for next page
-            window.location.href = "scratch_card.html";
-        }
-    </script>
-
     <div class="container">
         <h1>🎂 Let’s Celebrate with Purpose! 🎈</h1>
-        <p>💝 As part of Hriday’s Birthday, we’re spreading joy by **donating on your behalf**!<br>
-        📢 **Select a cause that speaks to your heart** and be part of something **bigger than just a celebration!** 🎊<br>
-        💡 Small acts create **big change**—let’s make a difference together! 🌍✨</p>
-
-        <p>Select a cause to donate:</p>
-        <select id="causeSelection" onchange="playMusic()">
-            <option value="" disabled selected>Choose a cause</option>
+        <p>🎁 As part of <strong>Hriday’s Birthday</strong>, we’re spreading joy by <strong>donating on your behalf</strong>! 🎁</p>
+        <p>📢 <strong>Select a cause that speaks to your heart</strong> and be part of something <strong>bigger than just a celebration!</strong> 🎊</p>
+        <p>💡 Small acts create <strong>big change</strong>—let’s make a difference together! 🌍</p>
+        <p>Select where you'd like the donation to go:</p>
+        <select id="cause">
             <option value="education">📚 Kids' Education</option>
             <option value="elderly">🏡 Elderly Care</option>
             <option value="animals">🐶 Animal Shelter</option>
             <option value="general">💖 General Donation</option>
         </select>
-
-        <button onclick="proceedToScratchCard()">🎂 Celebrate with Hriday 🎂</button>
+        <br>
+        <button onclick="redirectToScratchCard()">🎂 Celebrate with Hriday 🎂</button>
     </div>
-
+    <audio autoplay loop>
+        <source src="happy-birthday-background-music-298561.mp3" type="audio/mp3">
+    </audio>
+    <script>
+        function redirectToScratchCard() {
+            window.location.href = "scratch_card.html";
+        }
+    </script>
 </body>
 </html>
