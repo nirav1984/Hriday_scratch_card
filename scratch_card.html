@@ -15,30 +15,10 @@
             position: relative;
         }
 
-        /* **Lighter Overlay for Better Visibility (15%)** */
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.15); /* Less dark */
-            z-index: -1;
-        }
-
-        /* **Main Content Box - Transparent but Readable** */
-        .container {
-            background: rgba(0, 0, 0, 0.3); /* Further reduced transparency */
-            padding: 30px;
-            border-radius: 10px;
-            display: inline-block;
-            max-width: 90%;
-        }
-
         h1 {
             font-family: 'Dancing Script', cursive;
             font-size: 2.8em;
-            color: #FFD700; /* Gold for birthday feel */
+            color: #FFD700; /* Gold */
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
         }
 
@@ -46,21 +26,21 @@
             font-size: 1.5em;
             font-weight: 500;
             color: white;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
 
-        .scratch-box {
-            background: gray;
-            width: 200px;
+        /* **Scratchable Area** */
+        .scratch-container {
+            position: relative;
+            width: 250px;
             height: 100px;
-            display: inline-block;
-            margin: 15px 0;
-            color: black;
-            font-size: 1.8em;
-            font-weight: bold;
-            line-height: 100px;
-            text-align: center;
-            border-radius: 10px;
+            margin: 20px auto;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
             cursor: pointer;
         }
 
@@ -94,19 +74,18 @@
     </style>
 </head>
 <body>
-    <div class="overlay"></div> <!-- Lighter Overlay -->
-
     <div class="container">
         <h1>🎉 Hriday’s Birthday Scratch Card 🎉</h1>
         <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness.  
         Scratch below to see the donation amount we will donate on your behalf!</p>
 
-        <div class="scratch-box" onclick="revealAmount()">Scratch Here!</div>
-        <p id="amount" class="hidden">🎁 Your donation amount: ₹<span id="donationAmount"></span> 🎁</p>
+        <!-- Scratch-off Effect -->
+        <div class="scratch-container">
+            <canvas id="scratchCard" width="250" height="100"></canvas>
+            <p id="amount" class="hidden">🎁 Your donation amount: ₹<span id="donationAmount"></span> 🎁</p>
+        </div>
 
         <p>Send a heartfelt message:</p>
-        
-        <!-- Separate buttons for Nirav and Ekta -->
         <button onclick="sendMessage('9699929744')">💌 Send Message to Ekta 💌</button>
         <button onclick="sendMessage('9773084403')">💌 Send Message to Nirav 💌</button>
     </div>
@@ -114,13 +93,38 @@
     <audio id="birthdaySong" src="happy-birthday-background-music-298561.mp3" autoplay></audio>
 
     <script>
+        // Scratch Card Effect
+        const canvas = document.getElementById('scratchCard');
+        const ctx = canvas.getContext('2d');
+        let isScratching = false;
+
+        // Fill the canvas with gray scratch-off layer
+        ctx.fillStyle = "gray";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        canvas.addEventListener('mousedown', () => isScratching = true);
+        canvas.addEventListener('mouseup', () => isScratching = false);
+        canvas.addEventListener('mousemove', scratch);
+
+        function scratch(event) {
+            if (!isScratching) return;
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.arc(x, y, 15, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Reveal donation amount
         function revealAmount() {
             const amounts = [100, 150, 200, 250];
             const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
-            document.querySelector(".scratch-box").style.display = "none";
             document.getElementById("donationAmount").innerText = randomAmount;
             document.getElementById("amount").classList.remove("hidden");
         }
+
+        canvas.addEventListener('mouseup', revealAmount);
 
         function sendMessage(number) {
             const message = encodeURIComponent("I just participated in Hriday’s birthday donation! 🎉 Thank you for this beautiful initiative! 💖");
