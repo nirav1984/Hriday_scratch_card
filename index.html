@@ -4,57 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎁 The Joy of Giving 🎁</title>
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;600&display=swap');
 
-        /* Full-page Background */
         body {
-            font-family: 'Dancing Script', cursive;
+            font-family: 'Poppins', sans-serif;
             text-align: center;
             padding: 20px;
-            background: url('https://raw.githubusercontent.com/nirav1984/hriday_scratch_card/main/FB_IMG_1681316596026~2.jpg') no-repeat center center fixed;
+            background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center fixed;
             background-size: cover;
+            color: white;
             position: relative;
-            color: #8B4513; /* Deep Brown for better contrast */
         }
-
-        /* Soft Golden Overlay */
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 223, 100, 0.3); /* Light Gold */
-            z-index: -1;
-        }
-
-        .container {
-            background: rgba(255, 223, 100, 0.7); /* Golden yellow */
+        .overlay {
+            background: rgba(44, 62, 80, 0.85); /* Royal Blue Overlay */
             padding: 30px;
             border-radius: 10px;
             display: inline-block;
             margin-top: 20px;
             max-width: 90%;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
         }
-
         h1 {
             font-size: 2.8em;
             margin-bottom: 10px;
-            color: #8B4513; /* Deep Brown */
         }
-
         p {
             font-size: 1.5em;
             font-family: 'Poppins', sans-serif;
             margin-bottom: 20px;
             line-height: 1.5;
-            color: #6A4A3B; /* Warm Chocolate Brown */
         }
-
         select, button {
             padding: 10px;
             font-size: 1.2em;
@@ -62,58 +41,49 @@
             margin: 10px;
             border: none;
         }
-
         button {
-            background: #FF8C00; /* Warm Orange */
+            background: #FFD700;
             font-weight: bold;
-            color: white;
-            cursor: pointer;
+            color: #2C3E50;
         }
-
         button:hover {
-            background: #E67E22;
-        }
-
-        /* Audio Hidden But Auto-Playing */
-        audio {
-            display: none;
+            background: #FFA500;
         }
     </style>
 </head>
 <body>
-    <!-- Background Music -->
-    <audio autoplay loop>
-        <source src="happy-birthday-background-music-298561.mp3" type="audio/mpeg">
-    </audio>
-
-    <div class="container">
-        <h1>🎂 Let’s Celebrate with Purpose! 🎈</h1>
-        
-        <p>🎁 As part of <strong>Hriday’s Birthday</strong>, we’re spreading joy by <strong>donating on your behalf</strong>! 🎁</p>
-
-        <p>📢 <strong>Select a cause</strong> that speaks to your heart and be part of something <strong>bigger than just a celebration! 🎊</strong></p>
-
+    <div class="overlay">
+        <h1>🎂 Let's Celebrate with Purpose! 🎈</h1>
+        <p>🎁 As part of <strong>Hriday’s Birthday</strong>, we’re spreading joy by <strong>donating on your behalf!</strong> 🎁</p>
+        <p>📢 <strong>Select a cause</strong> that speaks to your heart and be part of something <strong>bigger than just a celebration!</strong> 🎊</p>
         <p>💡 Small acts create <strong>big change</strong>—let’s make a difference together! 🌍</p>
 
-        <p><strong>Select where you'd like the donation to go:</strong></p>
-        
-        <select id="cause">
+        <p>Select where you'd like the donation to go:</p>
+        <select id="cause" onchange="playMusic()">
             <option value="education">📚 Kids' Education</option>
             <option value="elderly">🏡 Elderly Care</option>
             <option value="animals">🐶 Animal Shelter</option>
             <option value="general">💖 General Donation</option>
         </select>
         
-        <br>
-        
-        <button onclick="redirectToScratch()">🎂 Celebrate with Hriday 🎂</button>
+        <button onclick="proceedToScratchCard()">🎂 Celebrate with Hriday 🎂</button>
     </div>
 
+    <audio id="bg-music" loop>
+        <source src="happy-birthday-background-music-298561.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
-        function redirectToScratch() {
+        function playMusic() {
+            let audio = document.getElementById("bg-music");
+            if (audio.paused) {
+                audio.play();
+            }
+        }
+
+        function proceedToScratchCard() {
             window.location.href = "scratch_card.html";
         }
     </script>
-
 </body>
 </html>
