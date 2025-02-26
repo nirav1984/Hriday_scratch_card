@@ -44,6 +44,7 @@
             line-height: 100px;
             text-align: center;
             border-radius: 10px;
+            cursor: pointer;
         }
         .hidden {
             visibility: hidden;
@@ -71,7 +72,7 @@
         Scratch below to see the donation amount we will donate on your behalf!</p>
 
         <div class="scratch-box" onclick="revealAmount()">Scratch Here!</div>
-        <p id="amount" class="hidden">🎁 Your donation amount: ₹<span id="donationValue"></span> 🎁</p>
+        <p id="amount" class="hidden">🎁 Your donation amount: ₹<span id="donationAmount"></span> 🎁</p>
 
         <p>Select where you'd like to donate:</p>
         <select id="cause">
@@ -87,9 +88,10 @@
 
     <script>
         function revealAmount() {
-            let donationValue = Math.floor(Math.random() * (250 - 100 + 1)) + 100;
-            document.getElementById("donationValue").textContent = donationValue;
+            const amounts = [100, 150, 200, 250]; // Fixed donation values
+            const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
             document.querySelector(".scratch-box").style.display = "none";
+            document.getElementById("donationAmount").textContent = randomAmount;
             document.getElementById("amount").classList.remove("hidden");
         }
         function sendMessage() {
