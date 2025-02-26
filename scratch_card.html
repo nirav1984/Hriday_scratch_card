@@ -82,8 +82,7 @@
             <option value="general">💖 General Donation</option>
         </select>
         
-        <button onclick="sendMessage()">🎥 Please record a video wishing Hriday Happy Birthday,  
-        mentioning which cause you'd like to donate to and why</button>
+        <button onclick="sendWhatsAppMessage()">💌 Send a heartfelt message on WhatsApp to Nirav/Ekta</button>
     </div>
 
     <script>
@@ -94,8 +93,12 @@
             document.getElementById("donationAmount").textContent = randomAmount;
             document.getElementById("amount").classList.remove("hidden");
         }
-        function sendMessage() {
-            alert("Thank you for your video message! 🎉");
+        
+        function sendWhatsAppMessage() {
+            const phoneNumber = "91XXXXXXXXXX"; // Replace with Nirav/Ekta's phone number
+            const message = encodeURIComponent("Happy Birthday Hriday! 🎉🎂 I love this wonderful initiative of giving. I have selected my cause and I'm excited to be a part of this celebration!");
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
         }
     </script>
 </body>
