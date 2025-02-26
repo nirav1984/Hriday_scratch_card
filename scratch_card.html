@@ -6,92 +6,95 @@
     <title>🎉 Hriday's Birthday Scratch Card 🎉</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             text-align: center;
-            background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center fixed;
-            background-size: cover;
+            background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center/cover;
             color: white;
             padding: 20px;
         }
+
         .overlay {
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.5);
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 15px;
             display: inline-block;
         }
-        button {
-            background-color: #ff9800;
+
+        #scratchBox {
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 20px;
+            background: orange;
             color: white;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
             border: none;
             cursor: pointer;
-            margin-top: 10px;
-        }
-        .scratch-box {
-            margin: 20px auto;
-            width: 80%;
-            height: 100px;
-            background: gray;
-            text-align: center;
-            line-height: 100px;
-            font-size: 20px;
-            font-weight: bold;
-            color: white;
             border-radius: 5px;
-            user-select: none;
-            cursor: pointer;
         }
+
         .hidden {
             display: none;
+        }
+
+        .whatsapp-btn {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 18px;
+            background: orange;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
     <div class="overlay">
         <h1>🎉 Hriday's Birthday Scratch Card 🎉</h1>
-        <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness.</p>
-        <p>Scratch below to see the donation amount and cause we will donate on your behalf!</p>
-
-        <div class="scratch-box" id="scratchBox" onclick="revealDonation()">Scratch Here!</div>
+        <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness. Scratch below to see the donation amount and cause we will donate on your behalf!</p>
+        
+        <button id="scratchBox" onclick="revealDonation()">🎁 Scratch Here! 🎁</button>
         <p id="donationText" class="hidden"></p>
 
-        <p>Send a heartfelt message to:</p>
-        <button onclick="sendMessage('Nirav')">📧 Message Nirav</button>
-        <button onclick="sendMessage('Ekta')">📧 Message Ekta</button>
+        <h3>Send a heartfelt message to:</h3>
+        <button class="whatsapp-btn" onclick="sendWhatsAppMessage('9773084403')">📧 Message Nirav</button>
+        <button class="whatsapp-btn" onclick="sendWhatsAppMessage('919699929744')">📧 Message Ekta</button>
     </div>
 
     <script>
-        function revealDonation() {
+        document.addEventListener("DOMContentLoaded", function () {
             let selectedCause = localStorage.getItem("selectedCause");
+
             if (!selectedCause) {
                 alert("No cause selected! Redirecting back to the selection page.");
                 window.location.href = "index.html";
                 return;
             }
 
-            let donationAmount = getRandomDonation();
-            let message = `🎁 We will donate ₹${donationAmount} for ${selectedCause} 🎁`;
+            function getRandomDonation() {
+                let amounts = [100, 150, 200, 250];
+                return amounts[Math.floor(Math.random() * amounts.length)];
+            }
 
-            document.getElementById("donationText").innerText = message;
-            document.getElementById("donationText").classList.remove("hidden");
-            document.getElementById("scratchBox").classList.add("hidden"); // Hide Scratch Here button
-        }
+            window.revealDonation = function () {
+                let donationAmount = getRandomDonation();
+                let selectedCause = localStorage.getItem("selectedCause"); // Get cause again
 
-        function getRandomDonation() {
-            let amounts = [100, 150, 200, 250];
-            return amounts[Math.floor(Math.random() * amounts.length)];
-        }
+                let message = `🎁 We will donate ₹${donationAmount} for ${selectedCause} 🎁`;
+                document.getElementById("donationText").innerText = message;
+                document.getElementById("donationText").classList.remove("hidden");
+                document.getElementById("scratchBox").classList.add("hidden"); // Hide Scratch button after click
+            };
+        });
 
-        function sendMessage(recipient) {
+        function sendWhatsAppMessage(phoneNumber) {
             let selectedCause = localStorage.getItem("selectedCause");
-            let donationAmount = getRandomDonation();
-            let message = `Hey! kindly contribute ₹${donationAmount} for ${selectedCause} in celebration of Hriday's birthday. Please share our blessings and best wishes for him too! 🎉🥳`;
-            let phoneNumber = recipient === "Nirav" ? "919773084403" : "919699929744"; // Add country code
+            let donationAmount = document.getElementById("donationText").innerText.match(/\d+/)[0]; // Extract amount
 
-            let whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappURL, "_blank");
+            let message = `Hi, I just celebrated Hriday's Birthday and a donation of ₹${donationAmount} will be made for ${selectedCause} on my behalf! 🎂 Thank you for spreading joy!`;
+
+            let url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
         }
     </script>
 </body>
