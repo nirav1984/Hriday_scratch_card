@@ -3,108 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎂 Hriday’s Birthday Scratch Card 🎉</title>
+    <title>🎂 Hriday’s Birthday Scratch Card 🎂</title>
     <style>
-        /* Page Styling */
         body {
             font-family: 'Comic Sans MS', cursive, sans-serif;
             text-align: center;
             padding: 20px;
-            background: url('https://images.unsplash.com/photo-1582578618630-c98a6a425230') no-repeat center center fixed;
-            background-size: cover;
-            color: #fff;
+            background: black;
+            color: white;
         }
-
-        /* Container Box */
         .card {
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(255, 255, 255, 0.1);
             padding: 20px;
-            border-radius: 15px;
-            display: inline-block;
-            width: 90%;
+            border-radius: 10px;
+            width: 80%;
             max-width: 400px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            margin: auto;
+            box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.5);
         }
-
-        /* Scratch Area */
         .scratch-box {
             background: gray;
-            width: 100%;
-            height: 60px;
-            margin: 10px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
+            padding: 15px;
+            color: black;
+            font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            color: #fff;
             border-radius: 5px;
+            margin: 10px 0;
         }
-
         .hidden { visibility: hidden; }
-
-        /* Button Styling */
-        button, select {
-            background-color: #ffcc00;
-            color: #000;
-            border: none;
-            padding: 10px;
-            margin: 5px;
-            border-radius: 5px;
+        select, button {
             font-size: 16px;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
         }
-
-        button:hover { background-color: #ff9900; }
+        select {
+            background: gold;
+            color: black;
+        }
+        button {
+            background: goldenrod;
+            color: white;
+        }
     </style>
 </head>
 <body>
-
-    <!-- Music Player (Click to Play) -->
-    <audio id="birthdayMusic" loop>
+    <audio autoplay loop>
         <source src="https://www.bensound.com/bensound-music/bensound-birthday.mp3" type="audio/mp3">
     </audio>
-    <button onclick="playMusic()">🎵 Play Birthday Music</button>
-
-    <!-- Main Scratch Card Content -->
     <div class="card">
         <h2>🎉 Hriday’s Birthday Scratch Card 🎉</h2>
         <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness. Scratch below to see the donation amount we will donate on your behalf!</p>
-
         <div class="scratch-box" onclick="revealAmount()">Scratch Here!</div>
-        <p id="amount" class="hidden">🎁 Your donation amount: ₹100 🎁</p>
-
+        <p class="hidden" id="amount">🎁 Your donation amount: ₹100 🎁</p>
         <p>Select where you'd like to donate:</p>
         <select id="cause">
             <option value="education">📚 Kids' Education</option>
             <option value="orphanage">💖 Orphanage</option>
-            <option value="animal">🐶 Animal Shelter</option>
-            <option value="oldage">🏡 Old Age Home</option>
+            <option value="animals">🐶 Animal Shelter</option>
+            <option value="oldage">👵 Old Age Home</option>
         </select>
-
-        <button onclick="sendMessage()">Send Video Message 🎥</button>
+        <button onclick="sendVideo()">Send Video Message 🎥</button>
     </div>
 
     <script>
         function revealAmount() {
-            document.querySelector('.scratch-box').style.visibility = 'hidden';
-            document.getElementById('amount').classList.remove('hidden');
-            playMusic(); // Auto-start music when scratch card is used
+            document.getElementById("amount").classList.remove("hidden");
         }
-
-        function playMusic() {
-            let music = document.getElementById("birthdayMusic");
-            music.play();
-        }
-
-        function sendMessage() {
-            let cause = document.getElementById("cause").value;
-            let message = encodeURIComponent(`I wish Hriday a Happy Birthday! I choose to donate to ${cause}! 🎉`);
-            let whatsappUrl = "https://wa.me/?text=" + message;
-            window.open(whatsappUrl, "_blank");
+        function sendVideo() {
+            alert("Record a video saying Happy Birthday Hriday and sharing your donation choice!");
         }
     </script>
-
 </body>
 </html>
