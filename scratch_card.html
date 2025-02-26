@@ -5,76 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎂 Hriday’s Birthday Scratch Card 🎂</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;600&display=swap');
+
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-family: 'Dancing Script', cursive;
             text-align: center;
             padding: 20px;
-            background: black;
+            background: linear-gradient(to bottom, #ff758c, #ff7eb3);
             color: white;
         }
-        .card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
             border-radius: 10px;
-            width: 80%;
-            max-width: 400px;
-            margin: auto;
-            box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.5);
+            display: inline-block;
+            margin-top: 20px;
+            max-width: 80%;
+        }
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.5em;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 20px;
+            line-height: 1.5;
         }
         .scratch-box {
             background: gray;
-            padding: 15px;
+            width: 200px;
+            height: 100px;
+            display: inline-block;
+            margin: 15px 0;
             color: black;
-            font-size: 18px;
+            font-size: 1.8em;
             font-weight: bold;
-            cursor: pointer;
-            border-radius: 5px;
-            margin: 10px 0;
+            line-height: 100px;
+            text-align: center;
+            border-radius: 10px;
         }
-        .hidden { visibility: hidden; }
+        .hidden {
+            visibility: hidden;
+        }
         select, button {
-            font-size: 16px;
             padding: 10px;
-            margin: 10px 0;
-            border: none;
+            font-size: 1.2em;
             border-radius: 5px;
-            cursor: pointer;
-        }
-        select {
-            background: gold;
-            color: black;
+            margin: 10px;
+            border: none;
         }
         button {
-            background: goldenrod;
-            color: white;
+            background: #ffcc00;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #ffb300;
         }
     </style>
 </head>
 <body>
-    <audio autoplay loop>
-        <source src="https://www.bensound.com/bensound-music/bensound-birthday.mp3" type="audio/mp3">
-    </audio>
-    <div class="card">
-        <h2>🎉 Hriday’s Birthday Scratch Card 🎉</h2>
-        <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness. Scratch below to see the donation amount we will donate on your behalf!</p>
+    <div class="container">
+        <h1>🎉 Hriday’s Birthday Scratch Card 🎉</h1>
+        <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness. 
+        Scratch below to see the donation amount we will donate on your behalf!</p>
+
         <div class="scratch-box" onclick="revealAmount()">Scratch Here!</div>
-        <p class="hidden" id="amount">🎁 Your donation amount: ₹100 🎁</p>
+        <p id="amount" class="hidden">🎁 Your donation amount: ₹100 🎁</p>
+
         <p>Select where you'd like to donate:</p>
         <select id="cause">
             <option value="education">📚 Kids' Education</option>
-            <option value="orphanage">💖 Orphanage</option>
+            <option value="elderly">🏡 Elderly Care</option>
             <option value="animals">🐶 Animal Shelter</option>
-            <option value="oldage">👵 Old Age Home</option>
+            <option value="general">💖 General Donation</option>
         </select>
-        <button onclick="sendVideo()">Send Video Message 🎥</button>
+        
+        <button onclick="sendMessage()">📹 Send Video Message</button>
     </div>
 
     <script>
         function revealAmount() {
+            document.querySelector(".scratch-box").style.display = "none";
             document.getElementById("amount").classList.remove("hidden");
         }
-        function sendVideo() {
-            alert("Record a video saying Happy Birthday Hriday and sharing your donation choice!");
+        function sendMessage() {
+            alert("Thank you for your message! 🎉");
         }
     </script>
 </body>
