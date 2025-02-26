@@ -95,14 +95,14 @@
     <div class="content">
         <h1>🎉 Hriday’s Birthday Scratch Card 🎉</h1>
         <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness.  
-        Scratch below to see the donation amount and cause we have donated on your behalf!</p>
+        Scratch below to see the donation amount and cause we will donate on your behalf!</p>
 
         <div class="scratch-box" onclick="revealAmount()">Scratch Here!</div>
-        <p id="amount" class="hidden">We have donated ₹<span id="donationAmount"></span> for <span id="donationCause"></span> on your behalf 🎁</p>
+        <p id="amount" class="hidden">We will donate ₹<span id="donationAmount"></span> for <span id="donationCause"></span> on your behalf 🎁</p>
 
         <p>Send a heartfelt message:</p>
         <button onclick="sendMessage('919699929744')">💌 Send Message to Ekta 💌</button>
-        <button onclick="sendMessage('9773084403')">💌 Send Message to Nirav 💌</button>
+        <button onclick="sendMessage('919773084403')">💌 Send Message to Nirav 💌</button>
     </div>
 
     <audio id="birthdaySong" src="happy-birthday-background-music-298561.mp3" autoplay></audio>
@@ -117,12 +117,13 @@
                 "general": "General Donation"
             };
 
-            const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
-            
-            // Get cause from URL (set in index page)
+            // Get selected cause from URL parameter
             const urlParams = new URLSearchParams(window.location.search);
-            const causeKey = urlParams.get('cause') || "general";
-            const selectedCause = causes[causeKey];
+            const causeKey = urlParams.get('cause'); 
+            const selectedCause = causes[causeKey] || "General Donation"; // Default to general if missing
+
+            // Randomize the donation amount
+            const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
 
             document.getElementById("donationAmount").innerText = randomAmount;
             document.getElementById("donationCause").innerText = selectedCause;
