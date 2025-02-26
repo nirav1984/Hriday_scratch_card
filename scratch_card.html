@@ -8,30 +8,47 @@
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;600&display=swap');
 
         body {
-            font-family: 'Dancing Script', cursive;
+            font-family: 'Poppins', sans-serif;
             text-align: center;
             padding: 20px;
-            background: #87CEEB; /* Sky Blue */
-            color: white;
+            background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center/cover;
+            position: relative;
         }
+
+        /* **Lighter Overlay for Better Visibility (15%)** */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.15); /* Less dark */
+            z-index: -1;
+        }
+
+        /* **Main Content Box - Transparent but Readable** */
         .container {
-            background: #4682B4; /* Slightly Darker Blue */
+            background: rgba(0, 0, 0, 0.3); /* Further reduced transparency */
             padding: 30px;
             border-radius: 10px;
             display: inline-block;
-            margin-top: 20px;
-            max-width: 80%;
+            max-width: 90%;
         }
+
         h1 {
+            font-family: 'Dancing Script', cursive;
             font-size: 2.8em;
-            margin-bottom: 10px;
+            color: #FFD700; /* Gold for birthday feel */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
         }
+
         p {
             font-size: 1.5em;
-            font-family: 'Poppins', sans-serif;
-            margin-bottom: 20px;
-            line-height: 1.5;
+            font-weight: 500;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
+
         .scratch-box {
             background: gray;
             width: 200px;
@@ -46,63 +63,82 @@
             border-radius: 10px;
             cursor: pointer;
         }
+
         .hidden {
             visibility: hidden;
         }
-        button {
+
+        select, button {
             padding: 10px;
             font-size: 1.2em;
             border-radius: 5px;
+            margin: 10px;
             border: none;
-            margin-top: 15px;
-            background: #FFD700;
-            font-weight: bold;
             cursor: pointer;
         }
+
+        select {
+            background: #FFB400;
+            color: white;
+        }
+
+        button {
+            background: #D2691E; /* Chocolate color */
+            color: white;
+            font-weight: bold;
+        }
+
         button:hover {
-            background: #FFA500;
+            background: #A0522D;
+        }
+
+        audio {
+            display: none;
         }
     </style>
 </head>
 <body>
-
-    <!-- Background Music -->
-    <audio autoplay loop>
-        <source src="happy-birthday-background-music-298561.mp3" type="audio/mp3">
-        Your browser does not support the audio tag.
-    </audio>
+    <div class="overlay"></div> <!-- Lighter Overlay -->
 
     <div class="container">
         <h1>🎉 Hriday’s Birthday Scratch Card 🎉</h1>
-        <p>Thank you for celebrating with Hriday! Scratch below to see the donation amount.</p>
+        <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness.  
+        Scratch below to see the donation amount we will donate on your behalf!</p>
 
         <div class="scratch-box" onclick="revealAmount()">Scratch Here!</div>
         <p id="amount" class="hidden">🎁 Your donation amount: ₹<span id="donationAmount"></span> 🎁</p>
 
-        <p><strong>Cause Selected:</strong> <span id="selectedCause"></span></p>
-
-        <button onclick="sendMessage('919699929744')">💌 Send a heartfelt message to Ekta</button>
-        <button onclick="sendMessage('919773084403')">💌 Send a heartfelt message to Nirav</button>
+        <p>Select where you'd like to donate:</p>
+        <select id="cause">
+            <option value="education">📚 Kids' Education</option>
+            <option value="elderly">🏡 Elderly Care</option>
+            <option value="animals">🐶 Animal Shelter</option>
+            <option value="general">💖 General Donation</option>
+        </select>
+        
+        <button onclick="sendMessage()">💌 Send a Heartfelt Message to Nirav or Ekta 💌</button>
     </div>
+
+    <audio id="birthdaySong" src="happy-birthday-background-music-298561.mp3" autoplay></audio>
 
     <script>
         function revealAmount() {
             const amounts = [100, 150, 200, 250];
             const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
-            document.getElementById("donationAmount").textContent = randomAmount;
             document.querySelector(".scratch-box").style.display = "none";
+            document.getElementById("donationAmount").innerText = randomAmount;
             document.getElementById("amount").classList.remove("hidden");
         }
 
-        function sendMessage(phoneNumber) {
-            const selectedCause = localStorage.getItem("selectedCause") || "a cause";
-            const donationAmount = document.getElementById("donationAmount").textContent;
-            const message = `Happy Birthday Hriday! 🎉 I have chosen to donate ₹${donationAmount} to ${selectedCause}.`;
-            window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`, "_blank");
-        }
+        function sendMessage() {
+            const numberEkta = "9699929744";  
+            const numberNirav = "9773084403";  
 
-        // Load the selected cause from index.html
-        document.getElementById("selectedCause").textContent = localStorage.getItem("selectedCause") || "Not Selected";
+            const message = encodeURIComponent("I just participated in Hriday’s birthday donation! 🎉 Thank you for this beautiful initiative! 💖");
+
+            const whatsappLink = `https://wa.me/${prompt("Send message to: 1 for Ekta, 2 for Nirav") === "1" ? numberEkta : numberNirav}?text=${message}`;
+            window.open(whatsappLink, "_blank");
+        }
     </script>
 </body>
 </html>
