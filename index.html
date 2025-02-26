@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎁 The Joy of Giving 🎁</title>
+    <title>🎂 The Joy of Giving 🎂</title>
     <style>
         body {
             font-family: 'Comic Sans MS', cursive, sans-serif;
@@ -11,25 +11,32 @@
             background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center/cover;
             color: white;
             padding: 20px;
-            position: relative;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
         .overlay {
             background: rgba(0, 0, 0, 0.5);
             padding: 20px;
             border-radius: 10px;
             display: inline-block;
+            width: 90%;
+            max-width: 500px;
         }
         select, button {
             font-size: 18px;
             padding: 10px;
-            margin-top: 10px;
             border-radius: 5px;
             cursor: pointer;
-        }
-        button {
             background-color: #ff4500;
             color: white;
             border: none;
+            width: 100%;
+            max-width: 250px;
+            margin-top: 10px;
         }
         button:hover {
             background-color: #e63900;
@@ -38,29 +45,28 @@
 </head>
 <body>
     <div class="overlay">
-        <h1>🎂 Let's Celebrate with Purpose! 🎈</h1>
-        <p>🎁 Birthdays are not just about receiving but also about **spreading love and kindness**. Join Hriday in making a difference! 🌍✨</p>
-        <p>📢 Select a cause that **touches your heart**, and we will donate **on your behalf**. 🎊</p>
-        <p>💡 Small acts create **big changes**—let’s **make a difference together!** ❤️</p>
-
+        <h1>🎂 Let's Celebrate with Purpose! 🎂</h1>
+        <p>🎁 As part of Hriday’s Birthday, we’re spreading joy by **donating on your behalf!** 🎁</p>
+        <p>📢 **Select a cause** that speaks to your heart and be part of something **bigger than just a celebration!** 🎊</p>
+        
         <label for="cause">Select where you'd like the donation to go:</label>
         <select id="cause">
             <option value="Kids' Education">📚 Kids' Education</option>
             <option value="Elderly Care">👵 Elderly Care</option>
             <option value="Animal Shelter">🐶 Animal Shelter</option>
-            <option value="Orphanage">🏡 Orphanage</option>
+            <option value="Orphanage">🏠 Orphanage</option>
         </select>
-        <br>
-        <button onclick="goToScratchCard()">🎂 Celebrate with Hriday 🎂</button>
+        
+        <button onclick="proceedToScratchCard()">🎂 Celebrate with Hriday 🎂</button>
     </div>
 
-    <audio id="bgMusic" loop>
+    <audio id="bgMusic" loop autoplay>
         <source src="happy-birthday-background-music.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
 
     <script>
-        function goToScratchCard() {
+        function proceedToScratchCard() {
             let selectedCause = document.getElementById("cause").value;
             localStorage.setItem("selectedCause", selectedCause);
             window.location.href = "scratch_card.html";
