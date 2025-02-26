@@ -3,81 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎂 The Joy of Giving 🎂</title>
+    <title>🎁 The Joy of Giving 🎁</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;600&display=swap');
+
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-family: 'Poppins', sans-serif;
             text-align: center;
+            padding: 20px;
             background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center/cover;
             color: white;
-            padding: 20px;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
         }
+
         .overlay {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
             border-radius: 10px;
             display: inline-block;
-            width: 90%;
-            max-width: 500px;
+            margin-top: 20px;
+            max-width: 90%;
         }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
         select, button {
-            font-size: 18px;
             padding: 10px;
+            font-size: 1.2em;
             border-radius: 5px;
-            cursor: pointer;
-            background-color: #ff4500;
-            color: white;
+            margin: 10px;
             border: none;
-            width: 100%;
-            max-width: 250px;
-            margin-top: 10px;
         }
+
+        button {
+            background: #FFA500;
+            font-weight: bold;
+            color: white;
+        }
+
         button:hover {
-            background-color: #e63900;
+            background: #FF4500;
         }
     </style>
 </head>
 <body>
     <div class="overlay">
-        <h1>🎂 Let's Celebrate with Purpose! 🎂</h1>
-        <p>🎁 As part of Hriday’s Birthday, we’re spreading joy by **donating on your behalf!** 🎁</p>
-        <p>📢 **Select a cause** that speaks to your heart and be part of something **bigger than just a celebration!** 🎊</p>
-        
-        <label for="cause">Select where you'd like the donation to go:</label>
-        <select id="cause">
-            <option value="Kids' Education">📚 Kids' Education</option>
-            <option value="Elderly Care">👵 Elderly Care</option>
-            <option value="Animal Shelter">🐶 Animal Shelter</option>
-            <option value="Orphanage">🏠 Orphanage</option>
+        <h1>🎂 Let’s Celebrate with Purpose! 🎈</h1>
+        <p>🎁 As part of <strong>Hriday’s Birthday</strong>, we’re spreading joy by <strong>donating on your behalf</strong>!</p>
+        <p>📢 <strong>Select a cause</strong> that speaks to your heart and be part of something <strong>bigger than just a celebration!</strong> 🎊</p>
+
+        <p>💡 Small acts create <strong>big change</strong>—let’s make a difference together! 🌍</p>
+
+        <p>Select where you'd like the donation to go:</p>
+        <select id="cause" onchange="storeCause()">
+            <option value="education">📚 Kids' Education</option>
+            <option value="elderly">🏡 Elderly Care</option>
+            <option value="animals">🐶 Animal Shelter</option>
+            <option value="general">💖 General Donation</option>
         </select>
         
-        <button onclick="proceedToScratchCard()">🎂 Celebrate with Hriday 🎂</button>
+        <button onclick="redirectToScratchCard()">🎂 Celebrate with Hriday 🎂</button>
     </div>
 
-    <audio id="bgMusic" loop autoplay>
-        <source src="happy-birthday-background-music.mp3" type="audio/mp3">
-        Your browser does not support the audio element.
-    </audio>
+    <audio id="birthdayAudio" src="happy-birthday-background-music-298561.mp3" loop></audio>
 
     <script>
-        function proceedToScratchCard() {
-            let selectedCause = document.getElementById("cause").value;
-            localStorage.setItem("selectedCause", selectedCause);
-            window.location.href = "scratch_card.html";
+        function storeCause() {
+            const selectedCause = document.getElementById("cause").value;
+            sessionStorage.setItem("selectedCause", selectedCause);
+            document.getElementById("birthdayAudio").play();
         }
 
-        document.body.addEventListener("click", function() {
-            const audio = document.getElementById("bgMusic");
-            if (audio.paused) {
-                audio.play().catch(error => console.log("Autoplay prevented:", error));
-            }
-        });
+        function redirectToScratchCard() {
+            window.location.href = "scratch_card.html";
+        }
     </script>
 </body>
 </html>
