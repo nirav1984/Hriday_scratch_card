@@ -11,78 +11,100 @@
             font-family: 'Poppins', sans-serif;
             text-align: center;
             padding: 20px;
-            background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
+            background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center/cover;
+            color: #502F0B; /* Dark Brown for readability */
             position: relative;
         }
+
         .overlay {
-            background: rgba(44, 62, 80, 0.85); /* Royal Blue Overlay */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 215, 100, 0.3); /* Light golden yellow overlay */
+            z-index: -1;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.8); /* Light cream color */
             padding: 30px;
             border-radius: 10px;
             display: inline-block;
-            margin-top: 20px;
             max-width: 90%;
         }
+
         h1 {
+            font-family: 'Dancing Script', cursive;
             font-size: 2.8em;
-            margin-bottom: 10px;
+            color: #6D3D14; /* Deep brown */
         }
+
         p {
             font-size: 1.5em;
-            font-family: 'Poppins', sans-serif;
-            margin-bottom: 20px;
-            line-height: 1.5;
+            font-weight: 500;
         }
+
         select, button {
             padding: 10px;
             font-size: 1.2em;
             border-radius: 5px;
             margin: 10px;
             border: none;
+            cursor: pointer;
         }
+
+        select {
+            background: #FFB400;
+            color: white;
+        }
+
         button {
-            background: #FFD700;
+            background: #D2691E; /* Chocolate color */
+            color: white;
             font-weight: bold;
-            color: #2C3E50;
         }
+
         button:hover {
-            background: #FFA500;
+            background: #A0522D;
+        }
+
+        audio {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="overlay">
+    <div class="overlay"></div>
+    <div class="container">
         <h1>🎂 Let's Celebrate with Purpose! 🎈</h1>
-        <p>🎁 As part of <strong>Hriday’s Birthday</strong>, we’re spreading joy by <strong>donating on your behalf!</strong> 🎁</p>
-        <p>📢 <strong>Select a cause</strong> that speaks to your heart and be part of something <strong>bigger than just a celebration!</strong> 🎊</p>
-        <p>💡 Small acts create <strong>big change</strong>—let’s make a difference together! 🌍</p>
+        <p>🎁 As part of <b>Hriday’s Birthday</b>, we’re spreading joy by <b>donating on your behalf!</b> 🎁</p>
+        
+        <p>📢 <b>Select a cause</b> that speaks to your heart and be part of something <b>bigger than just a celebration!</b> 🎊</p>
+        
+        <p>💡 Small acts create <b>big change</b>—let’s make a difference together! 🌍</p>
 
         <p>Select where you'd like the donation to go:</p>
-        <select id="cause" onchange="playMusic()">
+        <select id="cause" onchange="playMusicAndNavigate()">
+            <option value="">-- Choose a Cause --</option>
             <option value="education">📚 Kids' Education</option>
             <option value="elderly">🏡 Elderly Care</option>
             <option value="animals">🐶 Animal Shelter</option>
             <option value="general">💖 General Donation</option>
         </select>
-        
-        <button onclick="proceedToScratchCard()">🎂 Celebrate with Hriday 🎂</button>
+
+        <button onclick="playMusicAndNavigate()">🎂 Celebrate with Hriday 🎂</button>
     </div>
 
-    <audio id="bg-music" loop>
-        <source src="happy-birthday-background-music-298561.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="birthdaySong" src="happy-birthday-background-music-298561.mp3"></audio>
 
     <script>
-        function playMusic() {
-            let audio = document.getElementById("bg-music");
-            if (audio.paused) {
-                audio.play();
-            }
-        }
-
-        function proceedToScratchCard() {
-            window.location.href = "scratch_card.html";
+        function playMusicAndNavigate() {
+            var audio = document.getElementById("birthdaySong");
+            audio.play().catch(error => console.log("Autoplay blocked: ", error));
+            setTimeout(() => {
+                window.location.href = "scratch_card.html"; // Navigate to Scratch Card page
+            }, 2000);
         }
     </script>
 </body>
