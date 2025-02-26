@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎉 Hriday’s Birthday Scratch Card 🎉</title>
+    <title>🎁 The Joy of Giving 🎁</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;600&display=swap');
 
@@ -35,33 +35,18 @@
             line-height: 1.5;
         }
 
-        .scratch-box {
-            background: gray;
-            width: 200px;
-            height: 100px;
-            display: inline-block;
-            margin: 15px 0;
-            color: black;
-            font-size: 1.8em;
-            font-weight: bold;
-            line-height: 100px;
-            text-align: center;
-            border-radius: 10px;
-        }
-
-        .hidden {
-            visibility: hidden;
-        }
-
-        button {
+        select, button {
             padding: 10px;
             font-size: 1.2em;
             border-radius: 5px;
             margin: 10px;
             border: none;
+        }
+
+        button {
             background: #FFA500;
-            color: white;
             font-weight: bold;
+            color: white;
         }
 
         button:hover {
@@ -71,48 +56,34 @@
 </head>
 <body>
     <div class="overlay">
-        <h1>🎉 Hriday’s Birthday Scratch Card 🎉</h1>
-        <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness.  
-        Scratch below to see the donation amount and cause we will donate on your behalf!</p>
+        <h1>🎂 Let’s Celebrate with Purpose! 🎈</h1>
+        <p>🎁 As part of <strong>Hriday’s Birthday</strong>, we’re spreading joy by <strong>donating on your behalf</strong>!</p>
+        <p>📢 <strong>Select a cause</strong> that speaks to your heart and be part of something <strong>bigger than just a celebration!</strong> 🎊</p>
 
-        <div class="scratch-box" onclick="revealAmount()">Scratch Here!</div>
-        <p id="amount" class="hidden">🎁 We will donate ₹<span id="donationAmount"></span> for <span id="donationCause"></span> 🎁</p>
+        <p>💡 Small acts create <strong>big change</strong>—let’s make a difference together! 🌍</p>
 
-        <button onclick="sendMessage('9773084403')">📩 Send a heartfelt message to Nirav</button>
-        <button onclick="sendMessage('919699929744')">📩 Send a heartfelt message to Ekta</button>
+        <p>Select where you'd like the donation to go:</p>
+        <select id="cause" onchange="storeCause()">
+            <option value="education">📚 Kids' Education</option>
+            <option value="elderly">🏡 Elderly Care</option>
+            <option value="animals">🐶 Animal Shelter</option>
+            <option value="general">💖 General Donation</option>
+        </select>
+        
+        <button onclick="redirectToScratchCard()">🎂 Celebrate with Hriday 🎂</button>
     </div>
 
-    <audio id="birthdayAudio" src="happy-birthday-background-music-298561.mp3" loop autoplay></audio>
+    <audio id="birthdayAudio" src="happy-birthday-background-music-298561.mp3" loop></audio>
 
     <script>
-        function revealAmount() {
-            const amounts = [100, 150, 200, 250];
-            const causes = {
-                "education": "Kids' Education",
-                "elderly": "Elderly Care",
-                "animals": "Animal Shelter",
-                "general": "General Donation"
-            };
-
-            const selectedCauseKey = sessionStorage.getItem("selectedCause");
-
-            if (!selectedCauseKey || !causes[selectedCauseKey]) {
-                alert("No cause selected! Redirecting back to the selection page.");
-                window.location.href = "index.html";
-                return;
-            }
-
-            const selectedCause = causes[selectedCauseKey];
-            const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
-
-            document.getElementById("donationAmount").innerText = randomAmount;
-            document.getElementById("donationCause").innerText = selectedCause;
-            document.getElementById("amount").classList.remove("hidden");
-            document.querySelector(".scratch-box").style.display = "none";
+        function storeCause() {
+            const selectedCause = document.getElementById("cause").value;
+            sessionStorage.setItem("selectedCause", selectedCause);
+            document.getElementById("birthdayAudio").play();
         }
 
-        function sendMessage(phone) {
-            window.location.href = `https://wa.me/${phone}?text=Thank%20you%20for%20this%20beautiful%20gesture!`;
+        function redirectToScratchCard() {
+            window.location.href = "scratch_card.html";
         }
     </script>
 </body>
