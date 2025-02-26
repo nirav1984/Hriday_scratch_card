@@ -3,19 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hriday's Birthday Scratch Card</title>
+    <title>🎂 Hriday's Birthday Scratch Card 🎉</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        .card { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; }
-        .scratch-box { background: gray; width: 200px; height: 50px; margin: 20px auto; color: white; font-size: 20px; text-align: center; line-height: 50px; cursor: pointer; }
+        body { 
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center; 
+            padding: 20px; 
+            background: url('https://i.imgur.com/7ybCRzY.jpg') no-repeat center center fixed; 
+            background-size: cover;
+            color: #000;
+        }
+        .card {
+            max-width: 450px; 
+            margin: auto; 
+            padding: 20px; 
+            background: rgba(255, 255, 255, 0.95); 
+            border-radius: 15px; 
+            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
+            color: #333;
+            border: 5px solid #ff4081;
+        }
+        .scratch-box {
+            background: gray; 
+            width: 200px; 
+            height: 50px; 
+            margin: 20px auto; 
+            color: white; 
+            font-size: 20px; 
+            text-align: center; 
+            line-height: 50px; 
+            cursor: pointer; 
+            border-radius: 10px;
+        }
         .hidden { visibility: hidden; }
+        h2 {
+            color: #ff4081;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+            font-size: 28px;
+        }
+        p, select, button {
+            font-size: 18px;
+            color: #444;
+        }
+        select, button {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        button {
+            background-color: #ff4081;
+            color: white;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <div class="card">
-        <h2>🎉 Hriday’s Birthday Scratch Card 🎉</h2>
-        <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness. Scratch below to see the donation amount we will donate on your behalf!</p>
-        <div class="scratch-box" onclick="revealAmount()">Scratch Here!</div>
+        <h2>🎉 Happy Birthday Hriday! 🎂🎈🎁</h2>
+        <p>Thank you for celebrating with Hriday! Birthdays are all about fun, love, and sharing joy. Scratch below to see the donation amount we will donate on your behalf!</p>
+        <div class="scratch-box" onclick="revealAmount()">🎁 Scratch Here!</div>
         <p id="amount" class="hidden">🎁 Your donation amount: ₹100 🎁</p>
         <p>Select where you'd like to donate:</p>
         <select id="cause">
@@ -25,7 +73,7 @@
             <option value="oldage">😊 Old Age Home</option>
         </select>
         <br><br>
-        <button onclick="sendVideo()">Send Video Message 🎥</button>
+        <button onclick="sendVideo()">🎥 Send Birthday Video</button>
     </div>
 
     <script>
