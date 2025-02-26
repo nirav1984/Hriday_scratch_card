@@ -72,15 +72,16 @@
 
     <div class="overlay">
         <h1>🎉 Hriday's Birthday Scratch Card 🎉</h1>
-        <p>Thank you for celebrating with Hriday! Birthdays are about spreading joy and kindness.</p>
-        <p>🎈 Scratch below to see the donation amount and cause we will donate on your behalf!</p>
+        <p>Thank you for celebrating with Hriday! Birthdays are about **spreading joy and kindness.**</p>
+        <p>🎈 **Scratch below** to see the donation amount and cause **we will donate on your behalf!**</p>
+
         <div class="scratch-box" onclick="revealDonation()">🎁 Scratch Here 🎁</div>
 
         <div id="amount" class="hidden">
             <p>🎁 We will donate ₹<span id="donationAmount"></span> for <span id="donationCause"></span> 🎁</p>
         </div>
 
-        <p>Send a heartfelt message to Hriday:</p>
+        <p>Send a heartfelt message to:</p>
         <button class="message-button" onclick="sendMessage('919773084403')">📩 Message Nirav</button>
         <button class="message-button" onclick="sendMessage('919699929744')">📩 Message Ekta</button>
     </div>
@@ -95,13 +96,7 @@
         };
 
         function revealDonation() {
-            const selectedCauseKey = sessionStorage.getItem("selectedCause");
-
-            if (!selectedCauseKey || !causes[selectedCauseKey]) {
-                alert("No cause selected! Redirecting back to the selection page.");
-                window.location.href = "index.html";
-                return;
-            }
+            const selectedCauseKey = sessionStorage.getItem("selectedCause") || "education"; // Ensure default is set
 
             const selectedCause = causes[selectedCauseKey];
             const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
@@ -115,7 +110,7 @@
         function sendMessage(phone) {
             const amount = document.getElementById("donationAmount").innerText;
             const cause = document.getElementById("donationCause").innerText;
-            const message = `Hi! Thank you for celebrating Hriday's birthday. Thank you for donating ₹${amount} for ${cause} on our behalf. We send our blessings & wishes for Hriday!`;
+            const message = `Hi! Thank you for celebrating Hriday's birthday. We will be donating ₹${amount} for ${cause} on your behalf. Feel free to send your blessings & wishes for Hriday!`;
             window.location.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
         }
     </script>
