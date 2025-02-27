@@ -13,7 +13,8 @@
             padding: 20px;
             background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center/cover;
             color: white;
-            overflow: hidden;
+            overflow-y: auto; /* Ensures scrolling works */
+            height: 100vh;
         }
 
         .overlay {
@@ -23,6 +24,8 @@
             display: inline-block;
             margin-top: 20px;
             max-width: 90%;
+            position: relative;
+            z-index: 2;
         }
 
         h1 {
@@ -67,37 +70,23 @@
             background: #FF4500;
         }
 
-        /* Balloon Animation */
+        /* 🎈 Balloon Animation */
         .balloon {
             position: absolute;
+            bottom: -100px;
             width: 40px;
             height: 50px;
             background: red;
             border-radius: 50%;
-            animation: fall 4s linear infinite;
+            opacity: 0.8;
+            animation: floatBalloon 5s linear infinite;
         }
 
-        .balloon::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            width: 5px;
-            height: 15px;
-            background: white;
-            transform: translateX(-50%);
+        @keyframes floatBalloon {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
         }
 
-        @keyframes fall {
-            0% {
-                transform: translateY(-100vh);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh);
-                opacity: 0;
-            }
-        }
     </style>
 </head>
 <body>
@@ -129,7 +118,7 @@
         };
 
         function revealDonation() {
-            const selectedCauseKey = sessionStorage.getItem("selectedCause") || "education"; // Ensure default is set
+            const selectedCauseKey = sessionStorage.getItem("selectedCause") || "education"; 
 
             const selectedCause = causes[selectedCauseKey];
             const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
@@ -139,29 +128,7 @@
             document.getElementById("amount").classList.remove("hidden");
             document.querySelector(".scratch-box").style.display = "none";
 
-            startBalloonsEffect(); // Trigger balloons after reveal
-        }
-
-        function startBalloonsEffect() {
-            const container = document.body;
-            for (let i = 0; i < 20; i++) {
-                let balloon = document.createElement("div");
-                balloon.className = "balloon";
-                balloon.style.left = `${Math.random() * 100}vw`;
-                balloon.style.backgroundColor = getRandomColor();
-                balloon.style.animationDuration = `${2 + Math.random() * 3}s`; // Different speeds
-                container.appendChild(balloon);
-
-                // Remove balloon after animation ends
-                setTimeout(() => {
-                    balloon.remove();
-                }, 5000);
-            }
-        }
-
-        function getRandomColor() {
-            const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
-            return colors[Math.floor(Math.random() * colors.length)];
+            startBalloons(); // Trigger balloons when revealed
         }
 
         function sendMessage(phone) {
@@ -169,6 +136,26 @@
             const cause = document.getElementById("donationCause").innerText;
             const message = `Hi! Thank you for celebrating Hriday's birthday. Kindly donate ₹${amount} for ${cause} on our behalf. Blessings & wishes for Hriday!`;
             window.location.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+        }
+
+        // 🎈 Function to create balloons
+        function startBalloons() {
+            for (let i = 0; i < 10; i++) { // Control number of balloons
+                let balloon = document.createElement("div");
+                balloon.className = "balloon";
+                balloon.style.left = `${Math.random() * 100}vw`;
+                balloon.style.backgroundColor = getRandomColor();
+                balloon.style.animationDuration = `${Math.random() * 3 + 2}s`; 
+                document.body.appendChild(balloon);
+
+                // Remove balloons after animation
+                setTimeout(() => balloon.remove(), 5000);
+            }
+        }
+
+        function getRandomColor() {
+            const colors = ["red", "blue", "green", "yellow", "purple", "pink", "orange"];
+            return colors[Math.floor(Math.random() * colors.length)];
         }
     </script>
 </body>
