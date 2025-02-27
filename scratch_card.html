@@ -103,7 +103,7 @@
             <p>🎁 We will donate ₹<span id="donationAmount"></span> for <span id="donationCause"></span> 🎁</p>
         </div>
 
-        <p>Send a heartfelt message to:</p>
+        <p>Send a heartfelt message for Hriday:</p>
         <button class="message-button" onclick="sendMessage('919773084403')">📩 Message Nirav</button>
         <button class="message-button" onclick="sendMessage('919699929744')">📩 Message Ekta</button>
     </div>
@@ -134,7 +134,7 @@
         function sendMessage(phone) {
             const amount = document.getElementById("donationAmount").innerText;
             const cause = document.getElementById("donationCause").innerText;
-            const message = `Hi! Thank you for celebrating Hriday's birthday. Kindly donate ₹${amount} for ${cause} on our behalf. Blessings & wishes for Hriday!`;
+            const message = `Hi! Many happy returns of the day Hriday. Kindly donate ₹${amount} for ${cause} on our behalf. Blessings & wishes to you Hriday!`;
             window.location.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
         }
 
