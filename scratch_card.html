@@ -13,6 +13,7 @@
             padding: 20px;
             background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center/cover;
             color: white;
+            overflow: hidden;
         }
 
         .overlay {
@@ -65,6 +66,38 @@
         .message-button:hover {
             background: #FF4500;
         }
+
+        /* Balloon Animation */
+        .balloon {
+            position: absolute;
+            width: 40px;
+            height: 50px;
+            background: red;
+            border-radius: 50%;
+            animation: fall 4s linear infinite;
+        }
+
+        .balloon::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 5px;
+            height: 15px;
+            background: white;
+            transform: translateX(-50%);
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -105,6 +138,30 @@
             document.getElementById("donationCause").innerText = selectedCause;
             document.getElementById("amount").classList.remove("hidden");
             document.querySelector(".scratch-box").style.display = "none";
+
+            startBalloonsEffect(); // Trigger balloons after reveal
+        }
+
+        function startBalloonsEffect() {
+            const container = document.body;
+            for (let i = 0; i < 20; i++) {
+                let balloon = document.createElement("div");
+                balloon.className = "balloon";
+                balloon.style.left = `${Math.random() * 100}vw`;
+                balloon.style.backgroundColor = getRandomColor();
+                balloon.style.animationDuration = `${2 + Math.random() * 3}s`; // Different speeds
+                container.appendChild(balloon);
+
+                // Remove balloon after animation ends
+                setTimeout(() => {
+                    balloon.remove();
+                }, 5000);
+            }
+        }
+
+        function getRandomColor() {
+            const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
+            return colors[Math.floor(Math.random() * colors.length)];
         }
 
         function sendMessage(phone) {
