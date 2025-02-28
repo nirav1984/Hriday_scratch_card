@@ -85,11 +85,10 @@
             0% { transform: translateY(0); opacity: 1; }
             100% { transform: translateY(-100vh); opacity: 0; }
         }
-
     </style>
 </head>
 <body>
-    <audio id="birthdayAudio" src="happy-birthday-background-music-298561.mp3" autoplay loop></audio>
+    <audio id="birthdayAudio" src="happy-birthday-background-music-298561.mp3" loop></audio>
 
     <div class="overlay">
         <h1>🎉 Hriday's Birthday Scratch Card 🎉</h1>
@@ -117,8 +116,10 @@
         };
 
         function revealDonation() {
-            const selectedCauseKey = sessionStorage.getItem("selectedCause") || "education"; 
+            const audio = document.getElementById("birthdayAudio");
+            audio.play().catch(error => console.log("🔊 iOS Playback Prevention:", error));
 
+            const selectedCauseKey = sessionStorage.getItem("selectedCause") || "education"; 
             const selectedCause = causes[selectedCauseKey];
             const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
 
