@@ -68,27 +68,9 @@
         .message-button:hover {
             background: #FF4500;
         }
-
-        /* 🎈 Balloon Animation */
-        .balloon {
-            position: absolute;
-            bottom: -100px;
-            width: 40px;
-            height: 50px;
-            background: red;
-            border-radius: 50%;
-            opacity: 0.8;
-            animation: floatBalloon 5s linear infinite;
-        }
-
-        @keyframes floatBalloon {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-100vh); opacity: 0; }
-        }
     </style>
 </head>
-<body>
-    <!-- 🔹 Removed autoplay from audio -->
+<body onload="initializeAudio()">
     <audio id="birthdayAudio" src="happy-birthday-background-music-298561.mp3" loop></audio>
 
     <div class="overlay">
@@ -108,18 +90,19 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        function initializeAudio() {
             const audio = document.getElementById("birthdayAudio");
 
-            // ✅ Resume music if it was playing on the index page
+            // Check if music was playing on index page & resume it
             const shouldPlay = sessionStorage.getItem("audioPlayed") === "true";
 
             if (shouldPlay) {
-                setTimeout(() => {
+                document.body.addEventListener("click", function playAudioOnce() {
                     audio.play().catch(error => console.log("Playback prevented:", error));
-                }, 500); // Small delay to ensure autoplay works
+                    document.body.removeEventListener("click", playAudioOnce);
+                });
             }
-        });
+        }
 
         const amounts = [100, 150];
         const causes = {
