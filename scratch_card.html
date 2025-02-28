@@ -13,7 +13,7 @@
             padding: 20px;
             background: url('FB_IMG_1681316596026~2.jpg') no-repeat center center/cover;
             color: white;
-            overflow-y: auto;
+            overflow-y: auto; /* Ensures scrolling works */
         }
 
         .overlay {
@@ -68,10 +68,28 @@
         .message-button:hover {
             background: #FF4500;
         }
+
+        /* 🎈 Balloon Animation */
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 40px;
+            height: 50px;
+            background: red;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: floatBalloon 5s linear infinite;
+        }
+
+        @keyframes floatBalloon {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+
     </style>
 </head>
-<body onload="initializeAudio()">
-    <audio id="birthdayAudio" src="happy-birthday-background-music-298561.mp3" loop></audio>
+<body>
+    <audio id="birthdayAudio" src="happy-birthday-background-music-298561.mp3" autoplay loop></audio>
 
     <div class="overlay">
         <h1>🎉 Hriday's Birthday Scratch Card 🎉</h1>
@@ -90,20 +108,6 @@
     </div>
 
     <script>
-        function initializeAudio() {
-            const audio = document.getElementById("birthdayAudio");
-
-            // Check if music was playing on index page & resume it
-            const shouldPlay = sessionStorage.getItem("audioPlayed") === "true";
-
-            if (shouldPlay) {
-                document.body.addEventListener("click", function playAudioOnce() {
-                    audio.play().catch(error => console.log("Playback prevented:", error));
-                    document.body.removeEventListener("click", playAudioOnce);
-                });
-            }
-        }
-
         const amounts = [100, 150];
         const causes = {
             "education": "Kids' Education",
@@ -122,6 +126,8 @@
             document.getElementById("donationCause").innerText = selectedCause;
             document.getElementById("amount").classList.remove("hidden");
             document.querySelector(".scratch-box").style.display = "none";
+
+            startBalloons(); // Trigger balloons when revealed
         }
 
         function sendMessage(phone) {
@@ -129,6 +135,26 @@
             const cause = document.getElementById("donationCause").innerText;
             const message = `Hi! Many happy returns of the day Hriday. Kindly donate ₹${amount} for ${cause} on our behalf. Blessings & wishes to you Hriday!`;
             window.location.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+        }
+
+        // 🎈 Function to create balloons
+        function startBalloons() {
+            for (let i = 0; i < 10; i++) { // Control number of balloons
+                let balloon = document.createElement("div");
+                balloon.className = "balloon";
+                balloon.style.left = `${Math.random() * 100}vw`;
+                balloon.style.backgroundColor = getRandomColor();
+                balloon.style.animationDuration = `${Math.random() * 3 + 2}s`; 
+                document.body.appendChild(balloon);
+
+                // Remove balloons after animation
+                setTimeout(() => balloon.remove(), 5000);
+            }
+        }
+
+        function getRandomColor() {
+            const colors = ["red", "blue", "green", "yellow", "purple", "pink", "orange"];
+            return colors[Math.floor(Math.random() * colors.length)];
         }
     </script>
 </body>
